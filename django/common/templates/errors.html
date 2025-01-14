@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{{ status }} {{ statuscode }} | {{ statustext }}</title>
+        <link rel="stylesheet" href="{% static 'common/styles/errors.style.css' %}">
+    </head>
+    <body>
+        <div class="container">
+            <h2>{{ status }}</h2>
+            <h1>{{ statuscode }}</h1>
+            <p>{{ statustext }}</p>
+            <a href="/" class="btn-back">
+                <button>RETURN TO THE WEBSITE</button>
+            </a>
+        </div>
+        <footer class="footer">
+            <a href="https://www.nocciolli.com.br/" target="_blank">
+                <img class="logo" src="{% static 'common/images/logo/logo_icon_b_opacity.png' %}" alt="Logo Nocciolli">
+            </a>
+        </footer>
+    </body>
+</html>

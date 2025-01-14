@@ -1,0 +1,87 @@
+version: latest
+
+
+services:
+
+  nginx:
+    container_name: "base_nginx"
+    restart: always
+    tty: false
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    ports:
+      - "8000:80"
+    volumes:
+      - static-data:/vol/static
+    depends_on:
+      - django
+    networks:
+      - base_network
+
+  django:
+    container_name: "base_django"
+    restart: always
+    tty: true
+    build:
+      context: ./django
+      dockerfile: Dockerfile
+    volumes:
+      - static-data:/vol/static
+    env_file:
+      - "./django/.env"
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - base_network
+
+  postgres:
+    container_name: "base_postgres"
+    restart: always
+    tty: false
+    build:
+      context: ./postgres
+      dockerfile: Dockerfile
+    environment:
+      - POSTGRES_DB=basedb
+      - POSTGRES_USER=baseadmin
+      - POSTGRES_PASSWORD=y9PestSGfyDuRyT
+    volumes:
+      - postgres-data:/var/lib/postgresql/data:rw
+      - ./postgres/init-database.sh:/docker-entrypoint-initdb.d/init-database.sh
+    networks:
+      - base_network
+
+  adminer:
+    container_name: "base_adminer"
+    restart: always
+    tty: false
+    build:
+      context: ./adminer
+      dockerfile: Dockerfile
+    environment:
+      ADMINER_DEFAULT_SERVER: postgres
+    depends_on:
+      - postgres
+    networks:
+      - base_network
+
+  redis:
+    container_name: "base_redis"
+    restart: always
+    tty: false
+    build:
+      context: ./redis
+      dockerfile: Dockerfile
+    networks:
+      - base_network
+
+
+volumes:
+  postgres-data:
+  static-data:
+
+
+networks:
+  base_network:
