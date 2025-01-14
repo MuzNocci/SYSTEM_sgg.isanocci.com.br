@@ -1,0 +1,21 @@
+{% load static %}
+<aside id="sidebar">
+    <div class="logo">
+        <img src={% static "app/images/logo/IMG_3823.PNG" %} />
+    </div>
+    <nav>
+        <ul>
+            <a href="/"><li>Dashboard</li></a>
+            <a href={% url 'clients' %}><li>Clientes</li></a>
+            <a href="#events"></a><li>Serviços</li></a>
+            <a href="#events"></a><li>Galerias</li></a>
+        </ul>
+    </nav>
+    <div class="logout">
+        <nav>
+            <ul>
+                <a href=""></a><li>Sair</li></a>
+            </ul>
+        </nav>
+    </div>
+</aside>

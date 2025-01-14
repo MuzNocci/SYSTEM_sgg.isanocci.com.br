@@ -1,0 +1,51 @@
+{% extends '_base/base.html' %}
+{% load static %}
+
+{% block content %}
+<form action="cliente_cadastro.html">
+    <div class="button-container">
+        <h1>Lista de Clientes</h1>
+        <button class="new-client-button">
+            <i class="fa-solid fa-user-plus"></i> Novo Cliente
+        </button>
+    </div>
+</form>
+<div class="grid">
+    <div class="table">
+        <div class="row header">
+            <div class="cell">Foto</div>
+            <div class="cell">Nome</div>
+            <div class="cell">Instagram</div>
+            <div class="cell">Telefone</div>
+            <div class="cell">Ações</div>
+        </div> <!-- end row header -->
+        <div class="row">
+            <div class="cell" style="max-width: 50px;"><img src={% static 'app/images/clients/customer_man.png' %}></div>
+            <div class="cell">Müller Nocciolli Ribeiro</div>
+            <div class="cell"><a href="https://www.instagram.com/muller.nocciolli" target="_blank">@muller.nocciolli</a></div>
+            <div class="cell"><a href="https://wa.me/5522988066987" target="_blank">(11) 98765-4321</a></div>
+            <div class="cell" style="max-width: 100px;">
+                <button class="view">
+                    <a href="cliente_exibir.html">
+                        <i class="fa-solid fa-eye"></i>
+                    </a>
+                </button>
+                <button class="edit">
+                    <a href="cliente_editar.html">
+                        <i class="fa-solid fa-pen"></i>
+                    </a>
+                </button>
+                <button class="delete">
+                    <a href="cliente_excluir.html">
+                        <i class="fa-solid fa-trash"></i>
+                    </a>
+                </button>
+            </div>
+        </div> <!-- end row -->
+    </div> <!-- end table -->           
+</div> <!-- end grid -->
+<div class="pagination">
+    <button class="page-button active">1</button>
+    <button class="page-button">2</button>
+</div> <!-- end pagination -->
+{% endblock content %}
