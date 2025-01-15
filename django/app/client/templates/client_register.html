@@ -1,7 +1,7 @@
 {% extends "_base/base.html" %}
 {% load static %}
 
-{% {% block content %}
+{% block content %}
 <div class="button-container">
     <h1>Cadastro de Cliente</h1>
 </div>
@@ -16,7 +16,7 @@
                         <div class="data form-img">
                             <div class="upload-container">
                                 <!-- Local onde a imagem será exibida -->
-                                <img id="image-preview" class="preview" src="assets/images/clients/customer_woman.png" alt="Pré-visualização da imagem">
+                                <img id="image-preview" class="preview" src="{% static 'app/images/clients/customer_man.png' %}" alt="Pré-visualização da imagem">
 
                                 <!-- Campo de upload -->
                                 <label class="upload-label" for="upload-input">Foto</label>
@@ -161,4 +161,4 @@
         </button>
     </div>
 </form>
-{% endblock content %}%}
+{% endblock content %}

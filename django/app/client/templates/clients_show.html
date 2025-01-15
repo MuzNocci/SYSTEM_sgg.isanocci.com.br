@@ -2,14 +2,14 @@
 {% load static %}
 
 {% block content %}
-<form action="cliente_cadastro.html">
-    <div class="button-container">
-        <h1>Lista de Clientes</h1>
+<div class="button-container">
+    <h1>Lista de Clientes</h1>
+    <a href={% url 'client_register' %}>
         <button class="new-client-button">
             <i class="fa-solid fa-user-plus"></i> Novo Cliente
         </button>
-    </div>
-</form>
+    </a>
+</div>
 <div class="grid">
     <div class="table">
         <div class="row header">

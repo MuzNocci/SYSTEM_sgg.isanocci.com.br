@@ -25,3 +25,11 @@ class ClientView(View):
             'clients': client,
         }
         return render(request, 'clients_show.html', context)
+    
+
+class ClientRegister(View):
+
+
+    def get(self, request):
+
+        return render(request, 'client_register.html')
