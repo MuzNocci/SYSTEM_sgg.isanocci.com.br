@@ -16,6 +16,7 @@ urlpatterns = [
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
+
 handler403 = Handler403View.as_view()
 handler404 = Handler404View.as_view()
 handler500 = Handler500View.as_view()

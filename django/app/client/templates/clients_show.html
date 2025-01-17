@@ -10,6 +10,7 @@
         </button>
     </a>
 </div>
+{% if clients %}
 <div class="grid">
     <div class="table">
         <div class="row header">
@@ -19,14 +20,19 @@
             <div class="cell">Telefone</div>
             <div class="cell">Ações</div>
         </div> <!-- end row header -->
+        {% for client in clients %}
         <div class="row">
+            {% if client.photo %}
+            <div class="cell" style="max-width: 50px;"><img src="{% static 'app/images/clients/photos/' %}{{ client.photo_filename }}""></div>
+            {% else %}
             <div class="cell" style="max-width: 50px;"><img src={% static 'app/images/clients/customer_man.png' %}></div>
-            <div class="cell">Müller Nocciolli Ribeiro</div>
-            <div class="cell"><a href="https://www.instagram.com/muller.nocciolli" target="_blank">@muller.nocciolli</a></div>
-            <div class="cell"><a href="https://wa.me/5522988066987" target="_blank">(11) 98765-4321</a></div>
+            {% endif %}
+            <div class="cell">{{ client.name }}</div>
+            <div class="cell"><a href="https://www.instagram.com/{{ client.instagram }}" href="instagram://user?username={{ client.instagram }}" target="_blank">@{{ client.instagram }}</a></div>
+            <div class="cell"><a href="https://wa.me/55{{ client.phone_number }}" target="_blank">{{ client.phone }}</a></div>
             <div class="cell" style="max-width: 100px;">
                 <button class="view">
-                    <a href="cliente_exibir.html">
+                    <a href="{% url 'client_show' client.id %}">
                         <i class="fa-solid fa-eye"></i>
                     </a>
                 </button>
@@ -36,16 +42,35 @@
                     </a>
                 </button>
                 <button class="delete">
-                    <a href="cliente_excluir.html">
+                    <a href="{% url 'client_delete' id=client.id %}">
                         <i class="fa-solid fa-trash"></i>
                     </a>
                 </button>
             </div>
         </div> <!-- end row -->
-    </div> <!-- end table -->           
+        {% endfor %}
+    </div> <!-- end table -->         
 </div> <!-- end grid -->
 <div class="pagination">
     <button class="page-button active">1</button>
     <button class="page-button">2</button>
 </div> <!-- end pagination -->
+{% else %}
+<div class="grid">
+    <div class="table">
+        <div class="row header">
+            <div class="cell">Foto</div>
+            <div class="cell">Nome</div>
+            <div class="cell">Instagram</div>
+            <div class="cell">Telefone</div>
+            <div class="cell">Ações</div>
+        </div> <!-- end row header -->
+    </div> <!-- end table --> 
+    <div class="table">
+        <div class="row">
+            <div class="cell">Nenhum cliente cadastrado.</div>
+        </div> <!-- end row -->
+    </div> <!-- end table -->         
+</div> <!-- end grid -->
+{% endif %}  
 {% endblock content %}

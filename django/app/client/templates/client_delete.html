@@ -1,0 +1,27 @@
+{% extends "_base/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="button-container">
+    <h1>Excluir de Cliente</h1>
+</div>
+<form action="{% url 'client_delete' id=client.id %}" method="POST">
+    {% csrf_token %}
+    <div class="grid" >
+        <div class="form-section">
+            <h3>Você deseja excluir o cliente abaixo?</h3>
+            <div class="form-row" style="margin-top: 10px; padding-bottom: 5px;">
+                <div class="form-group">
+                    <div class="data">{{ client.name }}</div>
+                </div>
+            </div>
+        </div> <!-- end table -->           
+    </div> <!-- end grid -->
+    <div class="button-container">
+        <div></div>
+        <button class="add-client-button">
+            <i class="fa-solid fa-trash"></i> Excluir Cliente
+        </button>
+    </div>
+</form>
+{% endblock content %}

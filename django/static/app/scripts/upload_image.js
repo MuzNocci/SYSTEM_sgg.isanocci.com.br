@@ -1,5 +1,5 @@
     // Selecionar os elementos
-    const inputFile = document.getElementById('upload-input');
+    const inputFile = document.getElementById('photo');
     const previewImage = document.getElementById('image-preview');
 
     // Adicionar evento de mudança no input

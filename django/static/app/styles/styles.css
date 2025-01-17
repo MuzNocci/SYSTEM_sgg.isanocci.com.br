@@ -427,7 +427,7 @@
     }
 
     /* Ocultar o campo de upload padrão */
-    #upload-input {
+    #photo {
         display: none;
     }
 
