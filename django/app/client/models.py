@@ -1,6 +1,7 @@
 import os
 import uuid
 from django.db import models
+from django.conf import settings
 from common.utils import remove_chars
 
 
@@ -9,8 +10,10 @@ def unique_file_path(instance, filename):
 
     ext = filename.split('.')[-1]
     new_filename = f"{uuid.uuid4().hex}.{ext}"
-    # upload_to = 'vol/static/app/images/clients/photos/' # Produção
-    upload_to = 'static/app/images/clients/photos/' 
+    if settings.DEBUG:
+        upload_to = 'static/app/images/clients/photos/' 
+    else:
+        upload_to = 'vol/static/app/images/clients/photos/' # Produção
 
     while instance.__class__.objects.filter(photo=os.path.join(upload_to, new_filename)).exists():
         new_filename = f"{uuid.uuid4().hex}.{ext}"

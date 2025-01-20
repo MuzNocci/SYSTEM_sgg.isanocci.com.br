@@ -5,7 +5,7 @@
 <div class="button-container">
     <h1>Cadastrar Cliente</h1>
 </div>
-<form action="" method="POST">
+<form action="{% url 'client_register' %}" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="grid">
         <div class="form-section">
@@ -16,13 +16,9 @@
                         <label>Foto:</label>
                         <div class="data form-img">
                             <div class="upload-container">
-                                <!-- Local onde a imagem será exibida -->
                                 <img id="image-preview" class="preview" src="{% static 'app/images/clients/customer_woman.png' %}" alt="Pré-visualização da imagem">
-
-                                <!-- Campo de upload -->
                                 <label class="upload-label" for="photo">Foto</label>
-                                <input type="file" id="photo" name="photo" accept="image/*">
-                              
+                                {{ form.photo }}
                             </div>
                         </div>
                     </div>
@@ -31,21 +27,21 @@
                     <div class="form-row" style="margin-top: 10px;">
                         <div class="form-group">
                             <label for="nome">Nome:</label>
-                            <input type="text" id="name" name="name" placeholder="Digite o nome" required>
+                            {{ form.name }}
                         </div>
                         <div class="form-group">
                             <label for="instagram">Instagram:</label>
-                            <input type="text" id="instagram" name="instagram" placeholder="@instagram">
+                            {{ form.instagram }}
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group">
                             <label for="email">Email:</label>
-                            <input type="text" id="email" name="email" placeholder="Digite o e-mail" required>
+                            {{ form.email }}
                         </div>
                         <div class="form-group" style="max-width: 200px;">
-                            <label for="celular">Celular:</label>
-                            <input type="text" id="celular" name="celular" placeholder="(22) 99999-9999" required>
+                            <label for="phone">Telefone:</label>
+                            {{ form.phone }}
                         </div>
                         <div class="form-group" style="max-width: 110px;">
                             <label for="whatsapp">É WhatsApp?</label>
@@ -56,24 +52,20 @@
                     </div>
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="genero">Gênero:</label>
-                            <select id="genero" name="genero">
-                                <option value="">-- Selecione --</option>
-                                <option value="M">Masculino</option>
-                                <option value="F">Feminino</option>
-                            </select>
+                            <label for="gender">Gênero:</label>
+                            {{ form.gender }}
                         </div>
                         <div class="form-group">
-                            <label for="aniversario">Data Nascimento:</label>
-                            <input type="date" id="aniversario" name="aniversario" placeholder="00/00/0000">
+                            <label for="birth">Data Nascimento:</label>
+                            {{ form.birth }}
                         </div>
                         <div class="form-group">
                             <label for="cpf">CPF:</label>
-                            <input type="text" id="cpf" name="cpf" placeholder="999.999.999-99">
+                            {{ form.cpf }}
                         </div>
                         <div class="form-group">
                             <label for="RG">RG:</label>
-                            <input type="text" id="rg" name="rg" placeholder="99.999.999-6">
+                            {{ form.rg }}
                         </div>
                     </div>
                 </div>
@@ -81,75 +73,46 @@
             <h3>Endereço</h3>
             <div class="form-row" style="margin-top: 10px;">
                 <div class="form-group" style="max-width: 100px;">
-                    <label for="cep">CEP</label>
-                    <input type="text" id="cep" name="cep" placeholder="00000-000">
+                    <label for="zip_code">CEP</label>
+                    {{ form.zip_code }}
                 </div>
                 <div class="form-group">
-                    <label for="rua">Endereço</label>
-                    <input type="text" id="rua" name="rua" placeholder="Digite a endereço (Ex: Rua Fulano de Tal)">
+                    <label for="address">Endereço</label>
+                    {{ form.address }}
                 </div>
                 <div class="form-group" style="max-width: 120px;">
                     <label for="numero">Número</label>
-                    <input type="text" id="numero" name="numero" placeholder="Digite o número">
+                    {{ form.address_number }}
                 </div>
                 <div class="form-group">
-                    <label for="complemento">Complemento</label>
-                    <input type="text" id="complemento" name="complemento" placeholder="Digite o complemento do endereço">
+                    <label for="complement">Complemento</label>
+                    {{ form.complement }}
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group">
-                    <label for="bairro">Bairro</label>
-                    <input type="text" id="bairro" name="bairro" placeholder="Digite o bairro">
+                    <label for="neighborhood">Bairro</label>
+                    {{ form.neighborhood }}
                 </div>
                 <div class="form-group">
-                    <label for="cidade">Cidade</label>
-                    <input type="text" id="cidade" name="cidade" placeholder="Digite a cidade">
+                    <label for="city">Cidade</label>
+                    {{ form.city }}
                 </div>
                 <div class="form-group">
-                    <label for="estado">Selecione o Estado:</label>
-                    <select id="estado" name="estado">
-                        <option value="">-- Selecione --</option>
-                        <option value="AC">Acre</option>
-                        <option value="AL">Alagoas</option>
-                        <option value="AP">Amapá</option>
-                        <option value="AM">Amazonas</option>
-                        <option value="BA">Bahia</option>
-                        <option value="CE">Ceará</option>
-                        <option value="DF">Distrito Federal</option>
-                        <option value="ES">Espírito Santo</option>
-                        <option value="GO">Goiás</option>
-                        <option value="MA">Maranhão</option>
-                        <option value="MT">Mato Grosso</option>
-                        <option value="MS">Mato Grosso do Sul</option>
-                        <option value="MG">Minas Gerais</option>
-                        <option value="PA">Pará</option>
-                        <option value="PB">Paraíba</option>
-                        <option value="PR">Paraná</option>
-                        <option value="PE">Pernambuco</option>
-                        <option value="PI">Piauí</option>
-                        <option value="RJ">Rio de Janeiro</option>
-                        <option value="RN">Rio Grande do Norte</option>
-                        <option value="RS">Rio Grande do Sul</option>
-                        <option value="RO">Rondônia</option>
-                        <option value="RR">Roraima</option>
-                        <option value="SC">Santa Catarina</option>
-                        <option value="SP">São Paulo</option>
-                        <option value="SE">Sergipe</option>
-                        <option value="TO">Tocantins</option>
-                    </select>
+                    <label for="state">Selecione o Estado:</label>
+                    {{ form.state }}
                 </div>
             </div>
             <h3>Outros Dados</h3>
             <div class="form-row" style="margin-top: 10px;">
                 <div class="form-group">
-                    <label for="observacao">Observação:</label>
-                    <textarea id="observacao" name="observacao" rows="5"></textarea>
+                    <label for="observation">Observação:</label>
+                    {{ form.observation }}
                 </div>
                 <div class="form-group" style="max-width: 150px;">
                     <label for="active">Ativar cliente?</label>
                     <div>
-                        <input style="margin-top: 10px" type="checkbox" id="whatsapp" name="whatsapp">
+                        {{ form.active }}
                     </div>
                 </div>
             </div>
@@ -163,3 +126,8 @@
     </div>
 </form>
 {% endblock content %}
+
+{% block scripts %}
+<script src="{% static 'app/scripts/upload_image.js' %}"></script>
+<script src="{% static 'app/scripts/masks.js' %}"></script>
+{% endblock scripts %}

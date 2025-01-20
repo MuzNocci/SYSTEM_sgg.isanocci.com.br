@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from app.client.models import Client
+from app.client.forms import ClientRegisterForm
 
 
 
@@ -33,12 +34,45 @@ class ClientRegister(View):
 
     def get(self, request):
 
-        return render(request, 'client_register.html')
+        form = ClientRegisterForm()
+
+        context = {
+            'form' : form,
+        }
+        return render(request, 'client_register.html', context)
     
 
     def post(self, request):
 
-        form = request.POST
+        form = ClientRegisterForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            photo = form.cleaned_data.get('photo')
+            name = form.cleaned_data.get('name')
+            instagram = form.cleaned_data.get('instagram')
+            email = form.cleaned_data.get('email')
+            phone = form.cleaned_data.get('phone')
+            whatsapp = form.cleaned_data.get('whatsapp')
+            gender = form.cleaned_data.get('gender')
+            birth = form.cleaned_data.get('birth')
+            cpf = form.cleaned_data.get('cpf')
+            rg = form.cleaned_data.get('rg')
+
+            
+            Client.objects.create(
+                photo=photo,
+                name=name,
+                instagram=instagram,
+                email=email,
+                phone=phone,
+                whatsapp=whatsapp,
+                gender=gender,
+                birth=birth,
+                cpf=cpf,
+                rg=rg
+            )
+            
+            return redirect('clients_show')
 
         context = {
             'form': form

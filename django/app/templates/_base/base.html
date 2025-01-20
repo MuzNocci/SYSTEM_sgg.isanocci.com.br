@@ -27,6 +27,7 @@
             </section>
         </main>
         <script src="{% static 'app/scripts/scripts.js' %}"></script>
-        <script src="{% static 'app/scripts/upload_image.js' %}"></script>
+        {% block scripts %}
+        {% endblock scripts %}
     </body>
 </html>

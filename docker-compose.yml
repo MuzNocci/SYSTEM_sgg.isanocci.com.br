@@ -43,10 +43,8 @@ services:
     build:
       context: ./postgres
       dockerfile: Dockerfile
-    environment:
-      - POSTGRES_DB=basedb
-      - POSTGRES_USER=baseadmin
-      - POSTGRES_PASSWORD=y9PestSGfyDuRyT
+    env_file:
+      - ./postgres/.env
     volumes:
       - postgres-data:/var/lib/postgresql/data:rw
       - ./postgres/init-database.sh:/docker-entrypoint-initdb.d/init-database.sh

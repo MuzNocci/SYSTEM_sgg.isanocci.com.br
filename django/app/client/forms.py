@@ -1,18 +1,33 @@
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 from django import forms
+from common import validators
+from app.client.models import Client, remove_chars
+
 
 
 class ClientRegisterForm(forms.Form):
+
+
+    photo = forms.ImageField(
+        required=False,
+        widget=forms.FileInput(attrs={
+            'id': 'photo',
+            'name': 'photo',
+            'accept': 'image/*'
+        }),
+        error_messages={
+            'invalid': 'Insira uma imagem válida.'
+        }
+    )
 
     name = forms.CharField(
         required=True,
         widget=forms.TextInput(attrs={
             'id': 'name',
             'name': 'name',
-            'class': '',
             'placeholder': 'Digite o nome',
-            'maxlength':'255'
+            'maxlength': '255'
         }),
         error_messages={
             'required': 'O campo Nome é obrigatório.',
@@ -26,7 +41,7 @@ class ClientRegisterForm(forms.Form):
             'id': 'instagram',
             'name': 'instagram',
             'placeholder': '@instagram',
-            'maxlengh':'30',
+            'maxlength': '30'
         })
     )
 
@@ -51,18 +66,23 @@ class ClientRegisterForm(forms.Form):
             'name': 'phone',
             'placeholder': '(22) 99999-9999',
             'maxlength':'15',
+            'onkeydown':'javascript: fMasc( this, mPHONE );',
         }),
         error_messages={'required': 'O campo Celular é obrigatório.'}
     )
 
     whatsapp = forms.BooleanField(
         required=False,
-        widget=forms.CheckboxInput(attrs={'id': 'whatsapp', 'name': 'whatsapp'})
+        widget=forms.CheckboxInput(attrs={
+            'id': 'whatsapp',
+            'name': 'whatsapp',
+            'style': 'margin-top: 10px'
+        })
     )
 
     gender = forms.ChoiceField(
         required=False,
-        choices=[('', '-- Selecione --'), ('M', 'Masculino'), ('F', 'Feminino')],
+        choices=[('N', '-- Selecione --'), ('M', 'Masculino'), ('F', 'Feminino')],
         widget=forms.Select(attrs={
             'id': 'gender',
             'name': 'gender',
@@ -76,7 +96,7 @@ class ClientRegisterForm(forms.Form):
             'name': 'birth',
             'placeholder': 'dd/mm/aaaa',
             'type': 'date',
-            'maxlength':'10'
+            'maxlength':'10',
         }),
         error_messages={'required': 'O campo Data de Nascimento é obrigatório.'}
     )
@@ -87,7 +107,8 @@ class ClientRegisterForm(forms.Form):
             'id': 'cpf',
             'name': 'cpf',
             'placeholder': '999.999.999-99',
-            'maxlength':'14'
+            'maxlength':'14',
+            'onkeydown':'javascript: fMasc( this, mCPF );',
         }),
         error_messages={'required': 'O campo CPF é obrigatório.'}
     )
@@ -98,7 +119,8 @@ class ClientRegisterForm(forms.Form):
             'id': 'rg',
             'name': 'rg',
             'placeholder': '99.999.999-6',
-            'maxlength':'12'
+            'maxlength':'12',
+            'onkeydown':'javascript: fMasc( this, mRG );',
         }),
         error_messages={'required': 'O campo RG é obrigatório.'}
     )
@@ -110,6 +132,7 @@ class ClientRegisterForm(forms.Form):
             'name': 'zip_code',
             'placeholder': '00000-000',
             'maxlength':'9',
+            'onkeydown':'javascript: fMasc( this, mCEP );',
         }),
         error_messages={'required': 'O campo CEP é obrigatório.'}
     )
@@ -132,6 +155,7 @@ class ClientRegisterForm(forms.Form):
             'name': 'address_number',
             'placeholder': 'Digite o número',
             'maxlength':'6',
+            'onkeydown':'javascript: fMasc( this, isNumber );',
         }),
         error_messages={'required': 'O campo Número é obrigatório.'}
     )
@@ -146,11 +170,11 @@ class ClientRegisterForm(forms.Form):
         })
     )
 
-    district = forms.CharField(
+    neighborhood = forms.CharField(
         required=False,
         widget=forms.TextInput(attrs={
-            'id': 'district',
-            'name': 'district',
+            'id': 'neighborhood',
+            'name': 'neighborhood',
             'placeholder': 'Digite o bairro',
             'maxlength':'45',
         }),
@@ -170,7 +194,36 @@ class ClientRegisterForm(forms.Form):
 
     state = forms.ChoiceField(
         required=False,
-        choices=[('', '-- Selecione o Estado --'), ('SP', 'São Paulo'), ('RJ', 'Rio de Janeiro'), ('MG', 'Minas Gerais')],
+        choices=[
+            ('NI', '-- Selecione o Estado --'),
+            ('AC', 'Acre'),
+            ('AL', 'Alagoas'),
+            ('AP', 'Amapá'),
+            ('AM', 'Amazonas'),
+            ('BA', 'Bahia'),
+            ('CE', 'Ceará'),
+            ('DF', 'Distrito Federal'),
+            ('ES', 'Espírito Santo'),
+            ('GO', 'Goiás'),
+            ('MA', 'Maranhão'),
+            ('MT', 'Mato Grosso'),
+            ('MS', 'Mato Grosso do Sul'),
+            ('MG', 'Minas Gerais'),
+            ('PA', 'Pará'),
+            ('PB', 'Paraíba'),
+            ('PR', 'Paraná'),
+            ('PE', 'Pernambuco'),
+            ('PI', 'Piauí'),
+            ('RJ', 'Rio de Janeiro'),
+            ('RN', 'Rio Grande do Norte'),
+            ('RS', 'Rio Grande do Sul'),
+            ('RO', 'Rondônia'),
+            ('RR', 'Roraima'),
+            ('SC', 'Santa Catarina'),
+            ('SP', 'São Paulo'),
+            ('SE', 'Sergipe'),
+            ('TO', 'Tocantins')
+        ],
         widget=forms.Select(attrs={
             'id': 'state',
             'name': 'state'
@@ -191,18 +244,33 @@ class ClientRegisterForm(forms.Form):
 
     active = forms.BooleanField(
         required=False,
-        widget=forms.CheckboxInput(attrs={'id': 'active', 'name': 'active'})
+        widget=forms.CheckboxInput(attrs={
+            'id': 'active',
+            'name': 'active',
+        })
     )
 
 
-    def clean_cpf(self):
-        cpf = self.cleaned_data.get('cpf')
-        if len(cpf) != 14:
-            raise forms.ValidationError('CPF inválido.')
-        return cpf
 
     def clean_phone(self):
         phone = self.cleaned_data.get('phone')
-        if len(phone) != 14:
-            raise forms.ValidationError('Número de celular inválido.')
+        if len(phone) < 13:
+            raise forms.ValidationError('Número de telefone inválido.')
         return phone
+    
+    def clean_cpf(self):
+        cpf = self.cleaned_data.get('cpf')
+        if cpf:
+            validators.Validate.valid_cpf(cpf)
+            if Client.objects.filter(cpf=cpf).exists():
+                raise forms.ValidationError("Este CPF já está cadastrado.")
+        return cpf
+    
+    def clean_rg(self):
+        rg = self.cleaned_data.get('rg')
+        if rg:
+            if len(rg) != 12:
+                raise forms.ValidationError('RG inválido.')
+            if not remove_chars('[., -]', rg).isnumeric():
+                raise forms.ValidationError('RG inválido.')
+        return rg
