@@ -1,125 +1,121 @@
-# BASE_to_projects
+# Sistema de Gerenciamento de Galerias de Fotografia Online
 
+## Sobre o Projeto
 
-## Descrição
+O **Sistema de Gerenciamento de Galerias de Fotografia Online** é uma solução desenvolvida para facilitar a administração de imagens e galerias fotográficas. Criado utilizando o framework Django e orquestrado com Docker, o sistema é robusto, escalável e oferece funcionalidades completas para organização e exibição de fotos.
 
-O projeto **BASE_to_projects** é uma estrutura inicial para projetos desenvolvidos com o framework Django, configurada para ser executada em contêineres Docker. Esta base visa agilizar o início do desenvolvimento, fornecendo uma configuração prévia que inclui serviços comumente utilizados em aplicações web.
+---
 
+## Funcionalidades Principais
 
-## Funcionalidades
+- **Gerenciamento de Galerias**: Upload e organização de imagens em categorias personalizadas.
+- **Autenticação de Usuários**: Registro e login para administradores e visitantes.
+- **Integração de Serviços**: 
+  - Banco de dados PostgreSQL para armazenamento seguro de dados.
+  - Redis para otimização de performance com cache.
+  - Nginx para servir a aplicação e arquivos estáticos.
 
-- **Integração com Docker:** Facilita a criação e gerenciamento de ambientes isolados para a aplicação.
-- **Serviços pré-configurados:**
-  - **PostgreSQL:** Banco de dados relacional para armazenamento de dados.
-  - **Redis:** Armazenamento em memória utilizado para cache e filas.
-  - **Nginx:** Servidor web para servir a aplicação e arquivos estáticos.
-  - **Adminer:** Interface gráfica para gerenciamento do banco de dados.
-- **Estrutura Django pronta para desenvolvimento:** Inclui configurações iniciais para iniciar o desenvolvimento de imediato.
+---
 
+## Tecnologias Utilizadas
+
+- **Backend**: Django (Python)
+- **Banco de Dados**: PostgreSQL
+- **Cache**: Redis
+- **Orquestração**: Docker e Docker Compose
+- **Servidor Web**: Nginx
+
+---
+
+## Estrutura do Projeto
+
+A estrutura do projeto segue o seguinte padrão:
+
+```
+SYSTEM_Administracao-de-galerias/
+|— adminer/       # Configurações do Adminer
+|— django/        # Aplicação Django
+|— nginx/         # Configurações do Nginx
+|— postgres/      # Dados e configurações do PostgreSQL
+|— redis/         # Configurações do Redis
+|— docker-compose.yml  # Configuração do Docker Compose
+```
+
+---
 
 ## Requisitos
 
-Antes de iniciar, certifique-se de ter os seguintes softwares instalados em seu ambiente:
+- **Docker**
+- **Docker Compose**
+- **Git**
 
-- **Docker:** [Instalação do Docker](https://docs.docker.com/get-docker/)
-- **Docker Compose:** [Instalação do Docker Compose](https://docs.docker.com/compose/install/)
+Certifique-se de que essas ferramentas estejam instaladas em seu sistema antes de prosseguir.
 
+---
 
-## Instalação
+## Como Instalar e Rodar o Projeto
 
-Siga os passos abaixo para configurar o ambiente de desenvolvimento:
+1. **Clone o Repositório**:
 
-1. **Clone o repositório:**
+   ```bash
+   git clone https://github.com/MuzNocci/SYSTEM_Administracao-de-galerias.git
+   cd SYSTEM_Administracao-de-galerias
+   ```
 
-\`\`\`bash
-git clone https://github.com/MuzNocci/BASE_to_projects.git
-\`\`\`
+2. **Inicie os Contêineres**:
 
-2. **Navegue até o diretório do projeto:**
+   ```bash
+   docker-compose up -d
+   ```
 
-Para acessar o diretório do projeto, execute o comando abaixo:
+   Esse comando inicializa todos os contêineres definidos no `docker-compose.yml`.
 
-\`\`\`bash
-cd BASE_to_projects
-\`\`\`
+3. **Acesse a Aplicação**:
 
-3. **Configuração:**
-Antes de executar o projeto, configure as variáveis de ambiente necessárias:
+   Abra o navegador e acesse:
 
-4. **Editar o arquivo \`.env_example\` para \`.env\`:**
+   - **Aplicação Web**: `http://localhost`
+   - **Adminer** (gerenciamento do banco de dados): `http://localhost:8080`
 
-Edite o arquivo \`.env\` e defina os seguintes valores:
+---
 
-*   \`DJANGO_SECRET_KEY\`: Chave secreta para a aplicação Django.
-*   \`POSTGRES_DB\`: Nome do banco de dados PostgreSQL.
-*   \`POSTGRES_USER\`: Usuário do banco de dados.
-*   \`POSTGRES_PASSWORD\`: Senha do banco de dados.
-*   E os outros valores conforme necessário.
+## Personalizações e Configurações Adicionais
 
-5. **Editar o arquivo \`.init-database.sh_example\` para \`init-database.sh\`:**
+- **Variáveis de Ambiente**:
 
-Substitua usuario, senhadousario e bancodedados, conforme necessário e de acordo com os dados contidos no arquivo "docker-compose.yml".
+  Você pode configurar as variáveis de ambiente no arquivo `.env` para ajustar os parâmetros do banco de dados, cache e outros serviços.
 
-6. **Iniciar os contêineres em segundo plano:**
+- **Admin do Django**:
 
-Utilize o seguinte comando para iniciar os contêineres em segundo plano:
+  Para acessar o painel administrativo do Django, crie um superusuário:
 
-\`\`\`bash
-docker-compose up --build -d
-\`\`\`
+  ```bash
+  docker exec -it <nome-do-contêiner-django> python manage.py createsuperuser
+  ```
 
-7. **Parar os contêineres:**
-
-Para parar os contêineres, utilize:
-
-\`\`\`bash
-docker-compose down
-\`\`\`
-
-
-## Uso
-
-Após a configuração, acesse a aplicação em \`http://0.0.0.0:8000\`.
-
+---
 
 ## Contribuição
 
-Contribuições são bem-vindas!
+Contribuições são bem-vindas! Siga os passos abaixo para colaborar:
 
+1. Faça um fork do repositório.
+2. Crie uma branch para sua funcionalidade ou correção:
 
-### Como contribuir
+   ```bash
+   git checkout -b minha-feature
+   ```
 
-1.  Faça um fork deste repositório.
-2.  Crie uma nova branch para sua feature:
+3. Submeta um pull request descrevendo suas alterações.
 
-\`\`\`bash
-git checkout -b feature/nova-feature
-\`\`\`
-
-3.  Faça o commit das suas alterações:
-
-\`\`\`bash
-git commit -m 'Adiciona nova feature'
-\`\`\`
-
-4.  Faça o push para a branch criada:
-
-\`\`\`bash
-git push origin feature/nova-feature
-\`\`\`
-
-5.  Abra um Pull Request para o repositório original.
-
+---
 
 ## Licença
 
-Este projeto está licenciado sob a Licença MIT. Consulte o arquivo \`LICENSE\` para mais detalhes.
+Este projeto está licenciado sob a [MIT License](LICENSE).
 
+---
 
 ## Contato
 
-Para mais informações, entre em contato:
-
-*   Nome: \[Müller Nocciolli]
-*   Email: \[muller.nocciolli@gmail.com]
-*   LinkedIn: \[https://www.linkedin.com/in/m%C3%BCller-nocciolli/]
+Desenvolvido por **Müller Nocciolli**. Entre em contato pelo [LinkedIn](https://www.linkedin.com) ou envie um e-mail para **mullernocciolli@example.com**.
