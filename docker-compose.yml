@@ -11,10 +11,10 @@ services:
       context: ./nginx
       dockerfile: Dockerfile
     ports:
-      - "8000:80"
+      - "8010:80"
     volumes:
-      - static-data:/var/www/public/staticfiles
-      - media-data:/var/www/public/media
+      - ./django/staticfiles:/var/www/public/staticfiles
+      - ./django/medias:/var/www/public/medias
     depends_on:
       - django
     networks:
@@ -28,8 +28,8 @@ services:
       context: ./django
       dockerfile: Dockerfile
     volumes:
-      - static-data:/var/www/public/staticfiles
-      - media-data:/var/www/public/media
+      - ./django/staticfiles:/var/www/public/staticfiles
+      - ./django/medias:/var/www/public/medias
     env_file:
       - "./django/.env"
     depends_on:
@@ -79,8 +79,6 @@ services:
 
 volumes:
   postgres-data:
-  static-data:
-  media-data:
 
 
 networks:
