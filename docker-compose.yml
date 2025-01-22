@@ -4,7 +4,7 @@ version: latest
 services:
 
   nginx:
-    container_name: "base_nginx"
+    container_name: "isasgg_nginx"
     restart: always
     tty: false
     build:
@@ -13,31 +13,33 @@ services:
     ports:
       - "8000:80"
     volumes:
-      - static-data:/vol/static
+      - static-data:/var/www/public/staticfiles
+      - media-data:/var/www/public/media
     depends_on:
       - django
     networks:
-      - base_network
+      - isasgg_network
 
   django:
-    container_name: "base_django"
+    container_name: "isasgg_django"
     restart: always
     tty: true
     build:
       context: ./django
       dockerfile: Dockerfile
     volumes:
-      - static-data:/vol/static
+      - static-data:/var/www/public/staticfiles
+      - media-data:/var/www/public/media
     env_file:
       - "./django/.env"
     depends_on:
       - postgres
       - redis
     networks:
-      - base_network
+      - isasgg_network
 
   postgres:
-    container_name: "base_postgres"
+    container_name: "isasgg_postgres"
     restart: always
     tty: false
     build:
@@ -47,12 +49,11 @@ services:
       - ./postgres/.env
     volumes:
       - postgres-data:/var/lib/postgresql/data:rw
-      - ./postgres/init-database.sh:/docker-entrypoint-initdb.d/init-database.sh
     networks:
-      - base_network
+      - isasgg_network
 
   adminer:
-    container_name: "base_adminer"
+    container_name: "isasgg_adminer"
     restart: always
     tty: false
     build:
@@ -63,23 +64,25 @@ services:
     depends_on:
       - postgres
     networks:
-      - base_network
+      - isasgg_network
 
   redis:
-    container_name: "base_redis"
+    container_name: "isasgg_redis"
     restart: always
     tty: false
     build:
       context: ./redis
       dockerfile: Dockerfile
     networks:
-      - base_network
+      - isasgg_network
 
 
 volumes:
   postgres-data:
   static-data:
+  media-data:
 
 
 networks:
-  base_network:
+  isasgg_network:
+    driver: bridge

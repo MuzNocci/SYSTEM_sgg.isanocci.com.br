@@ -23,7 +23,7 @@
         {% for client in clients %}
         <div class="row">
             {% if client.photo %}
-            <div class="cell" style="max-width: 50px;"><img src="{% static 'app/images/clients/photos/' %}{{ client.photo_filename }}""></div>
+            <div class="cell" style="max-width: 50px;"><img src="{{ client.photo.url }}"></div>
             {% else %}
             <div class="cell" style="max-width: 50px;"><img src={% static 'app/images/clients/customer_man.png' %}></div>
             {% endif %}

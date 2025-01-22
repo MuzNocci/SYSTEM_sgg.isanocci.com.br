@@ -57,6 +57,15 @@ class ClientRegister(View):
             birth = form.cleaned_data.get('birth')
             cpf = form.cleaned_data.get('cpf')
             rg = form.cleaned_data.get('rg')
+            zip_code = form.cleaned_data.get('zip_code')
+            address = form.cleaned_data.get('address')
+            address_number = form.cleaned_data.get('address_number')
+            complement = form.cleaned_data.get('complement')
+            neighborhood = form.cleaned_data.get('neighborhood')
+            city = form.cleaned_data.get('city')
+            state = form.cleaned_data.get('state')
+            observation = form.cleaned_data.get('observation')
+            active = form.cleaned_data.get('active')
 
             
             Client.objects.create(
@@ -69,7 +78,16 @@ class ClientRegister(View):
                 gender=gender,
                 birth=birth,
                 cpf=cpf,
-                rg=rg
+                rg=rg,
+                zip_code = zip_code,
+                address = address,
+                address_number = address_number,
+                complement = complement,
+                neighborhood = neighborhood,
+                city = city,
+                state = state,
+                observation = observation,
+                active = active,
             )
             
             return redirect('clients_show')

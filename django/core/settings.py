@@ -144,8 +144,11 @@ USE_TZ = False
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
-STATIC_URL = '/assets/'
-STATIC_ROOT = os.path.join(BASE_DIR, '/vol/static/')
+STATIC_URL = '/assets/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+MEDIA_URL = '/assets/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 # Default primary key field type

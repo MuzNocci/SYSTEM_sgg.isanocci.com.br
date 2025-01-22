@@ -9,7 +9,7 @@ from .models import Client
 # Classe para customizar a exibição do modelo Client no admin
 class ClientAdmin(admin.ModelAdmin):
     # Campos que serão exibidos na lista de clientes no admin
-    list_display = ('photo', 'name', 'email', 'cpf', 'created_at','active')
+    list_display = ('name', 'email', 'cpf', 'created_at','active')
     
     # Campos que podem ser usados para busca
     search_fields = ('name', 'email', 'cpf')

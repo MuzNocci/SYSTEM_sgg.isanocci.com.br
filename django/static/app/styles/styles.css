@@ -156,6 +156,10 @@
         color: rgb(95, 0, 0);
     }
 
+    .errorlist {
+        color: rgb(95, 0, 0);
+    }
+
     select {
         height: 34px;
         background-color: #fff;

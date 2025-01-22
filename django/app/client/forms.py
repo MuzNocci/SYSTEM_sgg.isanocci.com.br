@@ -251,6 +251,10 @@ class ClientRegisterForm(forms.Form):
     )
 
 
+    def clean_name(self):
+        name = self.cleaned_data.get('name')
+        validators.Validate.valid_name(name)
+        return name
 
     def clean_phone(self):
         phone = self.cleaned_data.get('phone')
