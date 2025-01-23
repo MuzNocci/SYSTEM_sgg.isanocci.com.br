@@ -1,15 +1,15 @@
-# Sistema de Gerenciamento de Galerias de Fotografia Online
+# Sistema de Gerenciamento de Galerias de Fotografia
 
 ## Sobre o Projeto
 
-O **Sistema de Gerenciamento de Galerias de Fotografia Online** é uma solução desenvolvida para facilitar a administração de imagens e galerias fotográficas. Criado utilizando o framework Django e orquestrado com Docker, o sistema é robusto, escalável e oferece funcionalidades completas para organização e exibição de fotos.
+O **Sistema de Gerenciamento de Galerias de Fotografia** é uma solução personalizada desenvolvida para facilitar a administração de clientes e galerias fotográficas. Criado utilizando o framework Django e orquestrado com Docker, o sistema é robusto, escalável e oferece funcionalidades completas para gestão de clientes e hospedagem de galerias.
 
 ---
 
 ## Funcionalidades Principais
 
-- **Gerenciamento de Galerias**: Upload e organização de imagens em categorias personalizadas.
-- **Autenticação de Usuários**: Registro e login para administradores e visitantes.
+- **Gerenciamento de Galerias**: Criação e administração das galerias e planos de hospedagem.
+- **Gerenciamento de Clientes**: Registro e administração de clientes.
 - **Integração de Serviços**: 
   - Banco de dados PostgreSQL para armazenamento seguro de dados.
   - Redis para otimização de performance com cache.
