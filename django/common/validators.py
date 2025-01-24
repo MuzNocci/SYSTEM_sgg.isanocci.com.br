@@ -20,11 +20,13 @@ class Validate:
                     raise ValidationError(_('O nome pode conter apenas letras.'))
 
 
-    def valid_date(_date:str):
+    def valid_date(_date:date):
 
-        today = date.today()
-        if _date >= date.today() or _date <= date((today.year-100), today.month, today.day):
-            raise ValidationError(_('Data de nascimento inválida.'))
+        if _date:
+            if _date >= date.today() or _date <= date(date.today().year - 110, date.today().month, date.today().day):
+                raise ValidationError("Data inválida.")
+            if _date > date(date.today().year - 18, date.today().month, date.today().day):
+                raise ValidationError("Menor de idade.")
 
 
     def valid_cpf(CPF:str):
@@ -148,12 +150,12 @@ class Validate:
 
         phone = utils.remove_chars(phone,'[() -]')
 
-        if len(phone) >= 10:
+        if len(phone) >= 10 or len(phone) <= 11:
             for i in range(len(phone)):
                 if not phone[i].isnumeric():
-                    raise ValidationError(_('Número de telefone inválido.'))
+                    raise ValidationError(_('Telefone inválido.'))
             
-        raise ValidationError(_('Número de telefone inválido.'))
+        raise ValidationError(_('Telefone inválido.'))
 
 
 

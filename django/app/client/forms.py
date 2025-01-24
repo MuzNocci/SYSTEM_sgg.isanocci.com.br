@@ -247,6 +247,7 @@ class ClientRegisterForm(forms.Form):
         widget=forms.CheckboxInput(attrs={
             'id': 'active',
             'name': 'active',
+            'checked': 'checked',
         })
     )
 
@@ -255,19 +256,29 @@ class ClientRegisterForm(forms.Form):
         name = self.cleaned_data.get('name')
         validators.Validate.valid_name(name)
         return name
+    
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        validators.Validate.valid_email(email)
+        return email
 
     def clean_phone(self):
         phone = self.cleaned_data.get('phone')
         if len(phone) < 13:
-            raise forms.ValidationError('Número de telefone inválido.')
+            raise forms.ValidationError('Telefone inválido.')
         return phone
+    
+    def clean_birth(self):
+        birth = self.cleaned_data.get('birth')
+        validators.Validate.valid_date(birth)
+        return birth
     
     def clean_cpf(self):
         cpf = self.cleaned_data.get('cpf')
         if cpf:
             validators.Validate.valid_cpf(cpf)
             if Client.objects.filter(cpf=cpf).exists():
-                raise forms.ValidationError("Este CPF já está cadastrado.")
+                raise forms.ValidationError("CPF já está cadastrado.")
         return cpf
     
     def clean_rg(self):

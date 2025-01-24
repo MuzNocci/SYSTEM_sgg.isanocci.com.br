@@ -10,27 +10,51 @@
         </button>
     </a>
 </div>
+<div class="search{% if search %} active{% endif %}">
+        {% if search %}
+        <div class="result_search">
+            Pesquisa por: {{ search }}
+        </div>
+        {% endif %}
+        <form action="{% url 'clients_show' %}" method="GET">
+           <input id="search" name="search" type="text" placeholder="Pesquisar" value="{{ search }}" />
+        </form>        
+</div> <!-- end search -->
 {% if clients %}
 <div class="grid">
     <div class="table">
         <div class="row header">
             <div class="cell">Foto</div>
-            <div class="cell">Nome</div>
+            <div class="cell name">Nome</div>
             <div class="cell">Instagram</div>
             <div class="cell">Telefone</div>
-            <div class="cell">Ações</div>
+            <div class="cell action">Ações</div>
         </div> <!-- end row header -->
         {% for client in clients %}
         <div class="row">
             {% if client.photo %}
             <div class="cell" style="max-width: 50px;"><img src="{{ client.photo.url }}"></div>
             {% else %}
-            <div class="cell" style="max-width: 50px;"><img src={% static 'app/images/clients/customer_man.png' %}></div>
+                {% if client.gender == 'F' %}
+                <div class="cell" style="max-width: 50px;"><img src={% static 'app/images/clients/customer_woman.png' %}></div>
+                {% else %}
+                <div class="cell" style="max-width: 50px;"><img src={% static 'app/images/clients/customer_man.png' %}></div>
+                {% endif %}
             {% endif %}
-            <div class="cell">{{ client.name }}</div>
-            <div class="cell"><a href="https://www.instagram.com/{{ client.instagram }}" href="instagram://user?username={{ client.instagram }}" target="_blank">@{{ client.instagram }}</a></div>
-            <div class="cell"><a href="https://wa.me/55{{ client.phone_number }}" target="_blank">{{ client.phone }}</a></div>
-            <div class="cell" style="max-width: 100px;">
+            <div class="cell name">{{ client.name }}</div>
+            <div class="cell">
+                {% if client.instagram %}
+                <a href="https://www.instagram.com/{{ client.instagram }}" href="instagram://user?username={{ client.instagram }}" target="_blank">@{{ client.instagram }}</a>
+                {% endif %}
+            </div>
+            <div class="cell">
+                {% if client.whatsapp %}
+                <a href="https://wa.me/55{{ client.phone_number }}" target="_blank">{{ client.phone }}</a>
+                {% else %}
+                {{ client.phone }}
+                {% endif %}
+            </div>
+            <div class="cell action">
                 <button class="view">
                     <a href="{% url 'client_show' client.id %}">
                         <i class="fa-solid fa-eye"></i>
@@ -52,23 +76,34 @@
     </div> <!-- end table -->         
 </div> <!-- end grid -->
 <div class="pagination">
-    <button class="page-button active">1</button>
-    <button class="page-button">2</button>
+    {% for page in clients.paginator.page_range %}
+        {% if page == clients.number %}
+            <button class="page-button active">{{ page }}</button>
+        {% else %}
+            <a href="{% url 'clients_show' %}?search={{ search }}&page={{ page }}">
+                <button class="page-button">{{ page }}</button>
+            </a>
+        {% endif %}
+    {% endfor %}
 </div> <!-- end pagination -->
 {% else %}
 <div class="grid">
     <div class="table">
         <div class="row header">
             <div class="cell">Foto</div>
-            <div class="cell">Nome</div>
+            <div class="cell name">Nome</div>
             <div class="cell">Instagram</div>
             <div class="cell">Telefone</div>
-            <div class="cell">Ações</div>
+            <div class="cell action">Ações</div>
         </div> <!-- end row header -->
     </div> <!-- end table --> 
     <div class="table">
         <div class="row">
+            {% if search %}
+            <div class="cell">Nenhum cliente que corresponda a pesquisa por "{{ search }}".</div>
+            {% else %}
             <div class="cell">Nenhum cliente cadastrado.</div>
+            {% endif %}
         </div> <!-- end row -->
     </div> <!-- end table -->         
 </div> <!-- end grid -->

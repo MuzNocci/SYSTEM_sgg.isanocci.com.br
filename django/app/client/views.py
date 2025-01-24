@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from app.client.models import Client
 from app.client.forms import ClientRegisterForm
+from django.db.models import Q
+from django.core.paginator import Paginator
 
 
 
@@ -10,24 +12,24 @@ class ClientsView(View):
 
     def get(self, request):
 
-        clients = Client.objects.all().order_by('name')
+        search = request.GET.get('search', '')
+
+        if search:
+            clients = Client.objects.filter(Q(name__icontains=search) | Q(phone__icontains=search)).order_by('name')
+        else:
+            clients = Client.objects.all().order_by('name')
+
+        paginator = Paginator(clients, 25)
+        page_number = request.GET.get('page', 1)
+        clients = paginator.get_page(page_number)
 
         context = {
             'clients': clients,
+            'search': search,
         }
         return render(request, 'clients_show.html', context)
     
-
-    def post(self, request):
-
-        clients = Client.objects.filter(name__icontains=request.POST['search']).order_by('name')
-
-        context = {
-            'clients': clients,
-        }
-        return render(request, 'clients_show.html', context)
     
-
 
 class ClientRegister(View):
 
@@ -66,7 +68,6 @@ class ClientRegister(View):
             state = form.cleaned_data.get('state')
             observation = form.cleaned_data.get('observation')
             active = form.cleaned_data.get('active')
-
             
             Client.objects.create(
                 photo=photo,
@@ -105,9 +106,31 @@ class ClientShow(View):
     def get(self, request, id):
 
         client = get_object_or_404(Client, id=id)
+        form = ClientRegisterForm(initial={
+            'name': client.name,
+            'instagram': client.instagram,
+            'email': client.email,
+            'phone': client.phone,
+            'whatsapp': client.whatsapp,
+            'gender': client.gender,
+            'birth': client.birth,
+            'cpf': client.cpf,
+            'rg': client.rg,
+            'zip_code': client.zip_code,
+            'address': client.address,
+            'address_number': client.address_number,
+            'complement': client.complement,
+            'neighborhood': client.neighborhood,
+            'city': client.city,
+            'state': client.state,
+            'observation': client.observation,
+            'active': client.active,
+        })
+        
 
         context = {
-            'client': client
+            'client': client,
+            'form' : form,
         }
         return render(request, 'client_show.html', context)
     
