@@ -5,10 +5,10 @@
     </div>
     <nav>
         <ul>
-            <a href="/"><li>Dashboard</li></a>
-            <a href={% url 'clients_show' %}><li>Clientes</li></a>
-            <a href="#events"></a><li>Serviços</li></a>
+            <a href="{% url 'dashboard_show' %}"><li>Dashboard</li></a>
+            <a href="{% url 'clients_show' %}"><li>Clientes</li></a>
             <a href="#events"></a><li>Galerias</li></a>
+            <a href="#events"></a><li>Pacotes</li></a>
         </ul>
     </nav>
     <div class="logout">
