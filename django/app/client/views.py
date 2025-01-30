@@ -1,3 +1,4 @@
+import os
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from app.client.models import Client
@@ -98,6 +99,68 @@ class ClientRegister(View):
         }
         return render(request, 'client_register.html', context)
     
+
+class ClientUpdate(View):
+
+
+    def get(self, request, id):
+
+        client = get_object_or_404(Client, id=id)
+        form = ClientRegisterForm(initial={
+            'photo': client.photo,
+            'name': client.name,
+            'instagram': client.instagram,
+            'email': client.email,
+            'phone': client.phone,
+            'whatsapp': client.whatsapp,
+            'gender': client.gender,
+            'birth': client.birth,
+            'cpf': client.cpf,
+            'rg': client.rg,
+            'zip_code': client.zip_code,
+            'address': client.address,
+            'address_number': client.address_number,
+            'complement': client.complement,
+            'neighborhood': client.neighborhood,
+            'city': client.city,
+            'state': client.state,
+            'observation': client.observation,
+            'active': client.active,
+        })
+
+        context = {
+            'client': client,
+            'form' : form,
+        }
+        return render(request, 'client_update.html', context)
+    
+
+    def post(self, request, id):
+
+        client = get_object_or_404(Client, id=id)
+        form = ClientRegisterForm(request.POST, request.FILES)
+
+        if form.is_valid():
+
+            new_photo = form.cleaned_data.get('photo')
+
+            if new_photo and client.photo and client.photo != new_photo:
+                if os.path.isfile(client.photo.path):
+                    os.remove(client.photo.path)
+
+            for field, value in form.cleaned_data.items():
+                if value:
+                    setattr(client, field, value)
+
+            client.save()
+            
+            return redirect('clients_show')
+
+        context = {
+            'client': client,
+            'form': form,
+        }
+        return render(request, 'client_update.html', context)
 
 
 class ClientShow(View):

@@ -3,7 +3,7 @@
 
 {% block content %}
 <div class="button-container">
-    <h1>Excluir de Cliente</h1>
+    <h1>Excluir Cliente</h1>
 </div>
 <form action="{% url 'client_delete' id=client.id %}" method="POST">
     {% csrf_token %}
