@@ -1,0 +1,34 @@
+{% extends "_base/base_login.html" %}
+{% load static %}
+
+{% block content %}
+
+    <div class="login_form">
+    
+        <div class="logo_form">
+            <img src={% static "app/images/logo/IMG_3823.PNG" %} />
+        </div>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="error-message">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    
+        <form action="{% url 'login_view' %}" method="POST">
+            {% csrf_token %}
+            <div class="form-group mt-5">
+                <label for="username">Usuário</label>
+                <input type="text" name="username" id="username" required>
+            </div>
+            <div class="form-group mt-2">
+                <label for="password">Senha</label>
+                <input type="password" name="password" id="password" required>
+            </div>
+            <button class="button mt-4">
+                <i class="fa-solid fa-user"></i> Entrar
+            </button>
+        </form>
+    </div>
+
+{% endblock content %}

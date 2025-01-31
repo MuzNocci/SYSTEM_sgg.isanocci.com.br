@@ -1,6 +1,32 @@
-{% extends '_base/base.html' %}
+{% extends "_base/base.html" %}
 {% load static %}
 
 {% block content %}
-
-{% endblock content%}
+<div class="button-container">
+    <h1>Dashboard</h1>
+</div>
+<div class="grid" >
+    <div class="form-section">
+        <h3>Pacotes expirados</h3>
+        <div class="form-row" style="margin-top: 10px; padding-bottom: 5px;">
+            <div class="form-group">
+                <div class="data">
+                    Não existe nenhum pacote expirado.
+                </div>
+            </div>
+        </div>
+    </div> <!-- end table -->           
+</div> <!-- end grid -->
+<div class="grid mt-3" >
+    <div class="form-section">
+        <h3>Pacotes a expirar</h3>
+        <div class="form-row" style="margin-top: 10px; padding-bottom: 5px;">
+            <div class="form-group">
+                <div class="data">
+                    Não existe nenhum pacote a expirar.
+                </div>
+            </div>
+        </div>
+    </div> <!-- end table -->           
+</div> <!-- end grid -->
+{% endblock content %}

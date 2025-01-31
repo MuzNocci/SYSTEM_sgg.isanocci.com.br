@@ -92,7 +92,7 @@ class ClientRegister(View):
                 active = active,
             )
             
-            return redirect('clients_show')
+            return redirect('clients_view')
 
         context = {
             'form': form
@@ -154,7 +154,7 @@ class ClientUpdate(View):
 
             client.save()
             
-            return redirect('clients_show')
+            return redirect('clients_view')
 
         context = {
             'client': client,
@@ -163,7 +163,7 @@ class ClientUpdate(View):
         return render(request, 'client_update.html', context)
 
 
-class ClientShow(View):
+class ClientView(View):
 
 
     def get(self, request, id):
@@ -217,4 +217,4 @@ class ClientDelete(View):
         client = get_object_or_404(Client, id=id)
         client.delete()
 
-        return redirect('clients_show')
+        return redirect('clients_view')

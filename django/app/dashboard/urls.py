@@ -5,6 +5,6 @@ from app.dashboard.views import DashboardView
 
 urlpatterns = [
     
-    path('dashboard/', DashboardView.as_view(), name='dashboard_show'),
+    path('dashboard/', DashboardView.as_view(), name='dashboard_view'),
 
 ]
