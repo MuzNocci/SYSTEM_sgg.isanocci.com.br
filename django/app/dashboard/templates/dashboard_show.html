@@ -8,25 +8,43 @@
 <div class="grid" >
     <div class="form-section">
         <h3>Pacotes expirados</h3>
-        <div class="form-row" style="margin-top: 10px; padding-bottom: 5px;">
-            <div class="form-group">
-                <div class="data">
-                    Não existe nenhum pacote expirado.
-                </div>
+        {% for package in expired %}
+        <div class="form-row" style="margin-top: 10px; padding-bottom: 5px; border-bottom: 1px solid #ccc;">
+            <div class="data">
+                {{ package.name }}
+            </div>
+            <div class="action">
+                {{ package.deadline }}
             </div>
         </div>
+        {% empty %}
+        <div class="form-row" style="margin-top: 10px; padding-bottom: 5px; border-bottom: 1px solid #ccc;">
+            <div class="data">
+                Não existe nenhum pacote expirado.
+            </div>
+        </div>
+        {% endfor %}
     </div> <!-- end table -->           
 </div> <!-- end grid -->
 <div class="grid mt-3" >
     <div class="form-section">
         <h3>Pacotes a expirar</h3>
-        <div class="form-row" style="margin-top: 10px; padding-bottom: 5px;">
-            <div class="form-group">
-                <div class="data">
-                    Não existe nenhum pacote a expirar.
-                </div>
+        {% for package in expiring %}
+        <div class="form-row" style="margin-top: 10px; padding-bottom: 5px; border-bottom: 1px solid #ccc;">
+            <div class="data">
+                {{ package.name }}
+            </div>
+            <div class="action">
+                {{ package.deadline }}
             </div>
         </div>
+        {% empty %}
+        <div class="form-row" style="margin-top: 10px; padding-bottom: 5px; border-bottom: 1px solid #ccc;">
+            <div class="data">
+                Não existe nenhum pacote expirado.
+            </div>
+        </div>
+        {% endfor %}
     </div> <!-- end table -->           
 </div> <!-- end grid -->
 {% endblock content %}
