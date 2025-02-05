@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.views import View
 
@@ -9,6 +9,9 @@ class LoginView(View):
 
 
     def get(self, request):
+
+        if request.user.is_authenticated:
+            return redirect('dashboard_view')
 
         return render(request, 'login.html')
     
@@ -27,3 +30,14 @@ class LoginView(View):
             messages.error(request, "Usuário ou senha inválidos")
 
         return render(request, "login.html")
+    
+
+
+class LogoutView(View):
+
+
+    def get(self, request):
+
+        logout(request)
+
+        return redirect("login_view")
