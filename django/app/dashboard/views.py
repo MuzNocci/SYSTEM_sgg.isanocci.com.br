@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
 from app.package.models import Package
 from datetime import datetime
@@ -6,7 +7,7 @@ from dateutil.relativedelta import relativedelta
 
 
 
-class DashboardView(View):
+class DashboardView(LoginRequiredMixin, View):
     
 
     def get(self, request):

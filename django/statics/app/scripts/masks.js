@@ -58,6 +58,15 @@ function mDATE(date){
     return date
 }
 
+function isMoney(valor){
+    valor=valor.replace(/\D/g,"")
+    let number = parseFloat(valor) / 100;
+    return number.toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL"
+    });
+}
+
 function isNumber(number){
     number=number.replace(/\D/g,"")
     return number

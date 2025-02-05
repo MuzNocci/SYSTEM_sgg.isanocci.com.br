@@ -61,6 +61,14 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'core.urls'
 
+LOGIN_URL = 'login_view'
+LOGIN_REDIRECT_URL = 'dashboard_view'
+
+SESSION_COOKIE_AGE = 315360000  
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False 
+SESSION_SAVE_EVERY_REQUEST = True
+
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

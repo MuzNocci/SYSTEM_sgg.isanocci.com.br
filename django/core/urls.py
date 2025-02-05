@@ -12,6 +12,7 @@ urlpatterns = [
     path('', include('authentication.urls')),
     path('auth/', include('app.dashboard.urls')),
     path('auth/', include('app.client.urls')),
+    path('auth/', include('app.package.urls')),
 
 ]
 

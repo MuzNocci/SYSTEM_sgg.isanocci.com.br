@@ -156,6 +156,19 @@ class Validate:
                     raise ValidationError(_('Telefone inválido.'))
             
         raise ValidationError(_('Telefone inválido.'))
+    
+
+    def valid_duration(duration:int):
+
+        if duration < 1 or duration > 365:
+            raise ValidationError(_('Duração inválida.'))
+        
+
+    def valid_price(price:str):
+
+        for i in range(len(price.replace('.',''))):
+            if not price[i].isnumeric():
+                raise ValidationError(_('Preço inválido.'))
 
 
 

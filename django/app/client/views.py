@@ -1,5 +1,6 @@
 import os
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
 from app.client.models import Client
 from app.client.forms import ClientRegisterForm
@@ -8,7 +9,7 @@ from django.core.paginator import Paginator
 
 
 
-class ClientsView(View):
+class ClientsView(LoginRequiredMixin, View):
 
 
     def get(self, request):
@@ -32,7 +33,7 @@ class ClientsView(View):
     
     
 
-class ClientRegister(View):
+class ClientRegister(LoginRequiredMixin, View):
 
 
     def get(self, request):
@@ -100,7 +101,7 @@ class ClientRegister(View):
         return render(request, 'client_register.html', context)
     
 
-class ClientUpdate(View):
+class ClientUpdate(LoginRequiredMixin, View):
 
 
     def get(self, request, id):
@@ -163,7 +164,7 @@ class ClientUpdate(View):
         return render(request, 'client_update.html', context)
 
 
-class ClientView(View):
+class ClientView(LoginRequiredMixin, View):
 
 
     def get(self, request, id):
@@ -199,7 +200,7 @@ class ClientView(View):
     
 
 
-class ClientDelete(View):
+class ClientDelete(LoginRequiredMixin, View):
 
 
     def get(self, request, id):

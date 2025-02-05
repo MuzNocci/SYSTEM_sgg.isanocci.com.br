@@ -1,0 +1,71 @@
+{% extends '_base/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="button-container">
+    <h1>Lista de Planos</h1>
+    <a href={% url 'plan_register' %}>
+        <button class="button">
+            <i class="fas fa-ticket"></i> Novo Plano
+        </button>
+    </a>
+</div>
+{% if plans %}
+<div class="grid">
+    <div class="table">
+        <div class="row header">
+            <div class="cell name">Nome</div>
+            <div class="cell">Duração</div>
+            <div class="cell">Preço</div>
+            <div class="cell action">Ações</div>
+        </div> <!-- end row header -->
+        {% for plan in plans %}
+        <div class="row">
+            <div class="cell name">{{ plan.name }}</div>
+            <div class="cell">{{ plan.duration }} dias</div>
+            <div class="cell">R$ {{ plan.price }}</div>
+            <div class="cell action">
+                <button class="edit">
+                    <a href="{% url 'plan_update' plan.id %}" title="Atualizar o cliente" alt="Atualizar o cliente">
+                        <i class="fa-solid fa-pen"></i>
+                    </a>
+                </button>
+                <button class="delete">
+                    <a href="" title="Excluir o cliente" alt="Excluir o cliente">
+                        <i class="fa-solid fa-trash"></i>
+                    </a>
+                </button>
+            </div>
+        </div> <!-- end row -->
+        {% endfor %}
+    </div> <!-- end table -->         
+</div> <!-- end grid -->
+<div class="pagination">
+    {% for page in clients.paginator.page_range %}
+        {% if page == clients.number %}
+            <button class="page-button active">{{ page }}</button>
+        {% else %}
+            <a href="{% url 'plans_view' %}?search={{ search }}&page={{ page }}">
+                <button class="page-button">{{ page }}</button>
+            </a>
+        {% endif %}
+    {% endfor %}
+</div> <!-- end pagination -->
+{% else %}
+<div class="grid">
+    <div class="table">
+        <div class="row header">
+            <div class="cell name">Nome</div>
+            <div class="cell">Duração</div>
+            <div class="cell">Preço</div>
+            <div class="cell action">Ações</div>
+        </div> <!-- end row header -->
+    </div> <!-- end table --> 
+    <div class="table">
+        <div class="row">
+            <div class="cell">Nenhum plano cadastrado.</div>
+        </div> <!-- end row -->
+    </div> <!-- end table -->         
+</div> <!-- end grid -->
+{% endif %}  
+{% endblock content %}
