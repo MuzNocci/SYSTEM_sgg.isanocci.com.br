@@ -8,7 +8,7 @@ from common.views import Handler403View, Handler404View, Handler500View, Handler
 
 urlpatterns = [
 
-    path('admin/', admin.site.urls),
+    path('auth/admin/', admin.site.urls),
     path('', include('authentication.urls')),
     path('auth/', include('app.dashboard.urls')),
     path('auth/', include('app.client.urls')),

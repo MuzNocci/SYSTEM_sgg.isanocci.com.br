@@ -7,6 +7,8 @@
         --colorpalette-light_red: #f8d8d8;
         --colorpalette-red: #990000;
         --colorpalette-dark_red: #770000;
+        --colorpalette-light_orange: #cfcdb4;
+        --colorpalette-orange: #996900;
     }
     
     /* General Reset */
@@ -143,6 +145,21 @@
 
     .logout {
         margin-top: auto;
+    }
+
+    .lbt {
+        display: flex;
+        height: 40px;
+        background-color: var(--colorpalette-turquoise);
+        transition: background 0.3s ease;
+        margin: 5px 5px;
+        padding: 0 10px;
+        align-items: center;
+        text-decoration: none;
+        color: white;
+        font-weight: bold;
+        opacity: 0.7;
+        cursor: pointer;
     }
     
     main {
@@ -325,7 +342,22 @@
         border-bottom: 1px solid var(--colorpalette-medium_gray);
     }
 
+    .row_dash {
+        background-color: white;
+        color: var(--colorpalette-dark_gray);
+        border-bottom: 1px solid var(--colorpalette-medium_gray);
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+    }
+
     .row.header {
+        background-color: var(--colorpalette-turquoise);
+        color: white;
+        font-weight: bold;
+        text-align: left;
+    }
+
+    .row_dash.header {
         background-color: var(--colorpalette-turquoise);
         color: white;
         font-weight: bold;
@@ -414,12 +446,21 @@
         gap: 1rem;
         padding: 0 1rem 1rem 1rem;
         justify-content: left;
+        align-items: center;
+        min-height: 60px;
     }
 
     .form-section .form-col {
         display: flex;
         flex-direction: row;
         justify-content: left;
+    }
+
+    .exp {
+        background-color: var(--colorpalette-medium_gray);
+        color: var(--colorpalette-dark_gray);
+        font-size: 16px;
+        padding: 10px 15px;
     }
         
     .form-group {
@@ -508,6 +549,28 @@
     .data {
         flex:1;
         width: 100%;
+    }
+
+    .expired {
+        color: var(--colorpalette-red);
+    }
+
+    .expired a {
+        color: var(--colorpalette-red);
+    }
+
+    .expired.act {
+        display: flex;
+        gap: 20px;
+    }
+
+    .expiring {
+        color: var(--colorpalette-orange);
+        
+    }
+
+    .expiring a {
+        color: var(--colorpalette-orange);
     }
 
     .pagination {

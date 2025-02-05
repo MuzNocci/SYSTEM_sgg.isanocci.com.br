@@ -45,6 +45,8 @@
             <div class="cell">
                 {% if client.instagram %}
                 <a href="https://www.instagram.com/{{ client.instagram }}" href="instagram://user?username={{ client.instagram }}" target="_blank">@{{ client.instagram }}</a>
+                {% else %}
+                ---
                 {% endif %}
             </div>
             <div class="cell">
