@@ -118,4 +118,4 @@ Este projeto está licenciado sob a [MIT License](LICENSE).
 
 ## Contato
 
-Desenvolvido por **Müller Nocciolli**. Entre em contato pelo [LinkedIn](https://www.linkedin.com) ou envie um e-mail para **mullernocciolli@example.com**.
+Desenvolvido por **Müller Nocciolli**. Entre em contato pelo [LinkedIn](https://www.linkedin.com/in/müller-nocciolli) ou envie um e-mail para **muller.nocciolli@gmail.com**.
