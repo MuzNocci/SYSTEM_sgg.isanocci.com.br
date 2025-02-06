@@ -101,6 +101,7 @@ class ClientRegister(LoginRequiredMixin, View):
         return render(request, 'client_register.html', context)
     
 
+
 class ClientUpdate(LoginRequiredMixin, View):
 
 
@@ -162,6 +163,7 @@ class ClientUpdate(LoginRequiredMixin, View):
             'form': form,
         }
         return render(request, 'client_update.html', context)
+
 
 
 class ClientView(LoginRequiredMixin, View):

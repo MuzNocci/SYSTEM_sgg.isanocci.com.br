@@ -5,14 +5,14 @@
 <div class="button-container">
     <h1>Excluir Cliente</h1>
 </div>
-<form action="{% url 'client_delete' id=client.id %}" method="POST">
+<form action="{% url 'plan_delete' id=plan.id %}" method="POST">
     {% csrf_token %}
     <div class="grid" >
         <div class="form-section">
             <h3>Você deseja excluir o cliente abaixo?</h3>
             <div class="form-row" style="padding: 1rem">
                 <div class="form-group">
-                    <div class="data delete">{{ client.name }}</div>
+                    <div class="data delete">{{ plan.name }}</div>
                 </div>
             </div>
         </div> <!-- end table -->           
@@ -20,7 +20,7 @@
     <div class="button-container">
         <div></div>
         <button class="del-client-button">
-            <i class="fa-solid fa-trash"></i> Excluir Cliente
+            <i class="fa-solid fa-trash"></i> Excluir Plano
         </button>
     </div>
 </form>

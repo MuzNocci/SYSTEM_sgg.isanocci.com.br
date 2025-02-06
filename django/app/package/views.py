@@ -3,7 +3,7 @@ from django.views import View
 from django.core.paginator import Paginator
 from app.package.models import Plan
 from app.package.forms import PlanRegisterForm
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 
 
@@ -20,6 +20,7 @@ class PlansView(LoginRequiredMixin, View):
         }
         return render(request, 'plans_show.html', context)
     
+
 
 class PlanRegister(LoginRequiredMixin, View):
 
@@ -56,6 +57,7 @@ class PlanRegister(LoginRequiredMixin, View):
         }
         return render(request, 'plan_register.html', context)
     
+
 
 class PlanUpdate(LoginRequiredMixin, View):
 
@@ -94,3 +96,25 @@ class PlanUpdate(LoginRequiredMixin, View):
             'plan' : plan
         }
         return render(request, 'plan_update.html', context)
+    
+
+
+class PlanDelete(LoginRequiredMixin, View):
+
+
+    def get(self, request, id):
+
+        plan = get_object_or_404(Plan, id=id)
+
+        context = {
+            'plan': plan
+        }
+        return render(request, 'plan_delete.html', context)
+    
+
+    def post(self, request, id):
+
+        plan = get_object_or_404(Plan, id=id)
+        plan.delete()
+
+        return redirect('plans_view')
