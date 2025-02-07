@@ -393,7 +393,7 @@
     }
 
     .cell.action {
-        width: 150px;
+        width: 170px;
     }
 
     .cell img {
@@ -415,7 +415,7 @@
         padding: 5px;
         cursor: pointer;
         font-size: 18px;
-        margin-right: 5px;
+        margin-right: 15px;
     }
 
     .cell button i {
