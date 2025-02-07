@@ -24,7 +24,7 @@
 <div class="grid">
     <div class="table">
         <div class="row header">
-            <div class="cell">Foto</div>
+            <div class="cell foto">Foto</div>
             <div class="cell name">Nome</div>
             <div class="cell">Instagram</div>
             <div class="cell">Telefone</div>
@@ -33,7 +33,7 @@
         {% for client in clients %}
         <div class="row">
             {% if client.photo %}
-            <div class="cell" style="max-width: 50px;"><img src="{{ client.photo.url }}"></div>
+            <div class="cell foto" style="max-width: 50px;"><img src="{{ client.photo.url }}"></div>
             {% else %}
                 {% if client.gender == 'F' %}
                 <div class="cell" style="max-width: 50px;"><img src={% static 'app/images/clients/customer_woman.png' %}></div>

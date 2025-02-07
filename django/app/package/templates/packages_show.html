@@ -1,0 +1,87 @@
+{% extends '_base/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="button-container">
+    <h1>Lista de Pacotes</h1>
+    <a href={% url 'package_register' %}>
+        <button class="button">
+            <i class="fas fa-plus"></i> Novo Pacote
+        </button>
+    </a>
+</div>
+<div class="search{% if search %} active{% endif %}">
+    {% if search %}
+    <div class="result_search">
+        Pesquisa por: {{ search }}
+    </div>
+    {% endif %}
+    <form action="{% url 'packages_view' %}" method="GET">
+       <input id="search" name="search" type="text" placeholder="Pesquisar" value="{{ search }}" />
+    </form>        
+</div> <!-- end search -->
+{% if packages %}
+<div class="grid">
+    <div class="table">
+        <div class="row header">
+            <div class="cell name">Cliente</div>
+            <div class="cell">Pacote</div>
+            <div class="cell">Contratado em</div>
+            <div class="cell">Expira em</div>
+            <div class="cell action">Ações</div>
+        </div> <!-- end row header -->
+        {% for package in packages %}
+        <div class="row">
+            <div class="cell name">{{ package.client.name }}</div>
+            <div class="cell">{{ package.plan.name }}</div>
+            <div class="cell">{{ package.created_at }}</div>
+            <div class="cell">{{ package.deadline }}</div>
+            <div class="cell action">
+                <button class="edit">
+                    <a href="{% url 'package_update' package.id %}" title="Atualizar o pacote" alt="Atualizar o pacote">
+                        <i class="fa-solid fa-pen"></i>
+                    </a>
+                </button>
+                <button class="delete">
+                    <a href="{% url 'package_delete' package.id %}" title="Excluir o pacote" alt="Excluir o pacote">
+                        <i class="fa-solid fa-trash"></i>
+                    </a>
+                </button>
+            </div>
+        </div> <!-- end row -->
+        {% endfor %}
+    </div> <!-- end table -->         
+</div> <!-- end grid -->
+<div class="pagination">
+    {% for page in packages.paginator.page_range %}
+        {% if page == packages.number %}
+            <button class="page-button active">{{ page }}</button>
+        {% else %}
+            <a href="{% url 'packages_view' %}?search={{ search }}&page={{ page }}">
+                <button class="page-button">{{ page }}</button>
+            </a>
+        {% endif %}
+    {% endfor %}
+</div> <!-- end pagination -->
+{% else %}
+<div class="grid">
+    <div class="table">
+        <div class="row header">
+            <div class="cell name">Cliente</div>
+            <div class="cell">Pacote</div>
+            <div class="cell">Expira em</div>
+            <div class="cell action">Ações</div>
+        </div> <!-- end row header -->
+    </div> <!-- end table --> 
+    <div class="table">
+        <div class="row">
+            {% if search %}
+            <div class="cell">Nenhum pacote que corresponda a pesquisa por "{{ search }}".</div>
+            {% else %}
+            <div class="cell">Nenhum pacote cadastrado.</div>
+            {% endif %}
+        </div> <!-- end row -->
+    </div> <!-- end table -->         
+</div> <!-- end grid -->
+{% endif %}  
+{% endblock content %}

@@ -1,7 +1,9 @@
 from django import forms
 from common import validators
+from app.client.models import Client
 from app.package.models import Plan, Package
 from decimal import Decimal
+from datetime import date
 
 
 
@@ -55,7 +57,6 @@ class PlanRegisterForm(forms.Form):
 
     def clean_name(self):
         name = self.cleaned_data.get('name')
-        validators.Validate.valid_name(name)
         return name
     
     def clean_duration(self):
@@ -67,3 +68,40 @@ class PlanRegisterForm(forms.Form):
         price = self.cleaned_data["price"]
         price = price.replace("R$", "").replace(".", "").replace(",", ".")
         return Decimal(price)
+    
+
+class PackageRegisterForm(forms.Form):
+
+
+    client = forms.ChoiceField(
+        required=False,
+        choices=[(client.id, client.name) for client in Client.objects.all()],
+        widget=forms.Select(attrs={
+            'id': 'client',
+            'name': 'client'
+        }),
+        error_messages={'required': 'O campo cliente é obrigatório.'}
+    )
+
+    plan = forms.ChoiceField(
+        required=False,
+        choices=[(plan.id, plan.name) for plan in Plan.objects.exclude(name__icontains="Automático")],
+        widget=forms.Select(attrs={
+            'id': 'plan',
+            'name': 'plan'
+        }),
+        error_messages={'required': 'O campo plano é obrigatório.'}
+    )
+
+    created_at = forms.DateField(
+        required=True,
+        widget=forms.DateInput(attrs={
+            'id': 'created_at',
+            'name': 'created_at',
+            'placeholder': 'dd/mm/aaaa',
+            'type': 'date',
+            'min': '1900-01-01',
+            'max': date.today(),
+        }),
+        error_messages={'required': 'O campo cata de criação é obrigatório.'}
+    )

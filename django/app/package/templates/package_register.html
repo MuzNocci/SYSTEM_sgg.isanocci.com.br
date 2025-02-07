@@ -4,44 +4,44 @@
 {% block content %}
 
 <div class="button-container">
-    <h1>Cadastrar Cliente</h1>
+    <h1>Cadastrar Pacote</h1>
 </div>
-<form action="{% url 'plan_update' plan.id %}" method="POST">
+<form action="{% url 'package_register' %}" method="POST">
     {% csrf_token %}
     <div class="grid">
         <div class="form-section">
-            <h3>Dados do Plano</h3>
+            <h3>Dados do Pacote</h3>
             <div class="form-col">
                 <div class="data">
                     <div class="form-row" style="align-items: flex-start">
                         <div class="form-group">
-                            <label for="nome">Nome:</label>
-                            {{ form.name }}
-                            {% if form.name.errors %}
+                            <label for="nome">Cliente:</label>
+                            {{ form.client }}
+                            {% if form.client.errors %}
                                 <ul class="errorlist">
-                                    {% for error in form.name.errors %}
+                                    {% for error in form.client.errors %}
                                         <li>{{ error }}</li>
                                     {% endfor %}
                                 </ul>
                             {% endif %}
                         </div>
                         <div class="form-group">
-                            <label for="instagram">Duração:</label>
-                            {{ form.duration }}
-                            {% if form.duration.errors %}
+                            <label for="instagram">Plano:</label>
+                            {{ form.plan }}
+                            {% if form.plan.errors %}
                                 <ul class="errorlist">
-                                    {% for error in form.duration.errors %}
+                                    {% for error in form.plan.errors %}
                                         <li>{{ error }}</li>
                                     {% endfor %}
                                 </ul>
                             {% endif %}
                         </div>
                         <div class="form-group">
-                            <label for="price">Preço:</label>
-                            {{ form.price }}
-                            {% if form.price.errors %}
+                            <label for="price">Data de Criação:</label>
+                            {{ form.created_at }}
+                            {% if form.created_at.errors %}
                                 <ul class="errorlist">
-                                    {% for error in form.price.errors %}
+                                    {% for error in form.created_at.errors %}
                                         <li>{{ error }}</li>
                                     {% endfor %}
                                 </ul>
@@ -55,7 +55,7 @@
     <div class="button-container">
         <div></div>
         <button class="button">
-            <i class="fas fa-sync"></i> Atualizar
+            <i class="fas fa-plus"></i> Cadastrar
         </button>
     </div>
 </form>

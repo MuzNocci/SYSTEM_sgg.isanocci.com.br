@@ -18,6 +18,7 @@
         <div class="row header">
             <div class="cell name">Cliente</div>
             <div class="cell">Pacote</div>
+            <div class="cell">Data de criação</div>
             <div class="cell">Data de expiração</div>
             <div class="cell action">Ações</div>
         </div> <!-- end row header -->
@@ -29,7 +30,10 @@
                 </a>
             </div>
             <div class="cell expired">
-                {{ package.name }}
+                {{ package.plan.name }}
+            </div>
+            <div class="cell expired">
+                {{ package.created_at }}
             </div>
             <div class="cell expired">
                 {{ package.deadline }}
@@ -52,6 +56,7 @@
         <div class="row header">
             <div class="cell name">Cliente</div>
             <div class="cell">Pacote</div>
+            <div class="cell">Data de criação</div>
             <div class="cell">Data de expiração</div>
             <div class="cell action">Ações</div>
         </div> <!-- end row header -->
@@ -75,6 +80,7 @@
         <div class="row header">
             <div class="cell name">Cliente</div>
             <div class="cell">Pacote</div>
+            <div class="cell">Data de criação</div>
             <div class="cell">Data de expiração</div>
             <div class="cell action">Ações</div>
         </div> <!-- end row header -->
@@ -86,7 +92,10 @@
                 </a>
             </div>
             <div class="cell expiring">
-                {{ package.name }}
+                {{ package.plan.name }}
+            </div>
+            <div class="cell expiring">
+                {{ package.created_at }}
             </div>
             <div class="cell expiring">
                 {{ package.deadline }}

@@ -1,6 +1,7 @@
 import uuid
 from django.db import models
 from app.client.models import Client
+from datetime import date
 
 
 
@@ -18,12 +19,11 @@ class Plan(models.Model):
 class Package(models.Model):
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, unique=True)
-    name = models.CharField(max_length=255, blank=False, null=False)
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
     plan = models.ForeignKey(Plan, on_delete=models.CASCADE)
-    created_at = models.DateField(auto_now_add=True)
+    created_at = models.DateField(default=date.today())
     deadline = models.DateField()
     active = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.name
+        return self.client.name + '_' + self.created_at.strftime("%d/%m/%Y") + '_' + self.deadline.strftime("%d/%m/%Y")

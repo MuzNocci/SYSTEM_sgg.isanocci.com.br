@@ -321,13 +321,13 @@
         background-color: var(--colorpalette-dark_red);
         text-decoration: none;
     }
-    
+
     .del-client-button:active {
         background-color: var(--colorpalette-dark_red);
     }
 
     .table {
-        min-width: 800px;
+        min-width: 950px;
         display: table;
         width: 100%;
         border-collapse: collapse;
@@ -388,8 +388,12 @@
         text-align: left;
     }
 
+    .cell.foto {
+        width: 50px;
+    }
+
     .cell.name {
-        width: 300px;
+        width: 270px;
     }
 
     .cell.action {
