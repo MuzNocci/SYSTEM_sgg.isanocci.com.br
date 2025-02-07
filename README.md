@@ -93,19 +93,6 @@ Certifique-se de que essas ferramentas estejam instaladas em seu sistema antes d
   docker exec -it <nome-do-contêiner-django> python manage.py createsuperuser
   ```
 
----
-
-## Contribuição
-
-Contribuições são bem-vindas! Siga os passos abaixo para colaborar:
-
-1. Faça um fork do repositório.
-2. Crie uma branch para sua funcionalidade ou correção:
-
-   ```bash
-   git checkout -b minha-feature
-   ```
-
 3. Submeta um pull request descrevendo suas alterações.
 
 ---
