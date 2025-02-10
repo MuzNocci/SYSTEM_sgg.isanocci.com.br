@@ -39,10 +39,10 @@
                 {{ package.deadline }}
             </div>
             <div class="cell action expired act">
-                <a href="{% url 'client_update' id=package.id %}" title="Renovar o pacote" alt="Renovar o pacote">
+                <a href="{% url 'package_update' id=package.id %}" title="Renovar o pacote" alt="Renovar o pacote">
                     <i class="fas fa-sync-alt"></i>
                 </a>
-                <a href="{% url 'client_update' id=package.id %}" title="Renovar o pacote" alt="Renovar o pacote">
+                <a href="{% url 'package_delete' id=package.id %}" title="Renovar o pacote" alt="Renovar o pacote">
                     <i class="fas fa-trash"></i>
                 </a>
             </div>
@@ -101,7 +101,7 @@
                 {{ package.deadline }}
             </div>
             <div class="cell action expiring act">
-                <a href="{% url 'client_update' id=package.id %}" title="Renovar o pacote" alt="Renovar o pacote">
+                <a href="{% url 'package_update' id=package.id %}" title="Renovar o pacote" alt="Renovar o pacote">
                     <i class="fas fa-sync-alt"></i>
                 </a>
             </div>

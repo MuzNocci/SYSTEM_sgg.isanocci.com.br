@@ -3,7 +3,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
 from app.package.models import Package
 from datetime import datetime
-from dateutil.relativedelta import relativedelta
 
 
 
