@@ -1,0 +1,40 @@
+{% extends "_base/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="button-container">
+    <h1>Excluir Cliente</h1>
+</div>
+<form action="{% url 'package_delete' id=package.id %}" method="POST">
+    {% csrf_token %}
+    <div class="grid" >
+        <div class="form-section">
+            <h3>Você deseja excluir o cliente abaixo?</h3>
+            <div class="form-row" style="padding: 1rem">
+                <div class="form-group">
+                    <label for="client">Cliente:</label>
+                    <div class="data delete">{{ package.client.name }}</div>
+                </div>
+                <div class="form-group">
+                    <label for="client">Plano:</label>
+                    <div class="data delete">{{ package.plan.name }}</div>
+                </div>
+                <div class="form-group">
+                    <label for="client">Criado em:</label>
+                    <div class="data delete">{{ package.created_at }}</div>
+                </div>
+                <div class="form-group">
+                    <label for="client">Expira em:</label>
+                    <div class="data delete">{{ package.deadline }}</div>
+                </div>
+            </div>
+        </div> <!-- end table -->           
+    </div> <!-- end grid -->
+    <div class="button-container">
+        <div></div>
+        <button class="del-client-button">
+            <i class="fa-solid fa-trash"></i> Excluir
+        </button>
+    </div>
+</form>
+{% endblock content %}

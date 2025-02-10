@@ -7,6 +7,7 @@ from app.package.models import Plan, Package
 from app.package.forms import PlanRegisterForm, PackageRegisterForm
 from django.shortcuts import render, redirect, get_object_or_404
 from datetime import datetime, timedelta
+from django.utils.dateformat import DateFormat
 
 
 
@@ -199,61 +200,65 @@ class PackageRegister(LoginRequiredMixin, View):
 class PackageUpdate(LoginRequiredMixin, View):
 
 
-    pass
-#     def get(self, request, id):
+    def get(self, request, id):
 
-#         package = Package.objects.get(id=id)
-#         form = PackageRegisterForm(initial={
-#             'name': package.name,
-#             'duration': package.duration,
-#             'price': 'R$ ' + str(package.price).replace('.', ',')
-#         })
+        package = get_object_or_404(Package, id=id)
+        form = PackageRegisterForm(initial={
+            'client': package.client.id,
+            'plan': package.plan.id,
+            'created_at': DateFormat(package.created_at).format('Y-m-d'),
+        })
 
-#         context = {
-#             'form' : form,
-#             'plan' : package,
-#         }
-#         return render(request, 'package_update.html', context)
-    
+        context = {
+            'form' : form,
+            'package' : package,
+        }
+        return render(request, 'package_update.html', context)
 
-#     def post(self, request, id):
 
-#         package = Package.objects.get(id=id)
-#         form = PackageRegisterForm(request.POST)
+    def post(self, request, id):
 
-#         if form.is_valid():
-#             package.name = form.cleaned_data.get('name')
-#             package.duration = form.cleaned_data.get('duration')
-#             package.price = form.cleaned_data.get('price')
-#             package.save()
+        package = get_object_or_404(Package, id=id)
+        form = PackageRegisterForm(request.POST)
 
-#             return redirect('packages_view')
+        if form.is_valid():
+
+            package.client = Client.objects.get(id=form.cleaned_data.get('client'))
+            package.plan = Plan.objects.get(id=form.cleaned_data.get('plan'))
+
+            created_at = form.cleaned_data.get('created_at')
+            deadline = created_at + timedelta(days=package.plan.duration)
+            
+            package.created_at = created_at
+            package.deadline = deadline
+            package.save()
+
+            return redirect('packages_view')
         
-#         context = {
-#             'form' : form,
-#             'plan' : package,
-#         }
-#         return render(request, 'package_update.html', context)
+        context = {
+            'form' : form,
+            'package' : package
+        }
+        return render(request, 'package_update.html', context)
     
 
 
 class PackageDelete(LoginRequiredMixin, View):
 
 
-    pass
-#     def get(self, request, id):
+    def get(self, request, id):
 
-#         plan = get_object_or_404(Plan, id=id)
+        package = get_object_or_404(Package, id=id)
 
-#         context = {
-#             'plan': plan
-#         }
-#         return render(request, 'plan_delete.html', context)
-    
+        context = {
+            'package': package,
+        }
+        return render(request, 'package_delete.html', context)
 
-#     def post(self, request, id):
 
-#         plan = get_object_or_404(Plan, id=id)
-#         plan.delete()
+    def post(self, request, id):
 
-#         return redirect('plans_view')
+        package = get_object_or_404(Package, id=id)
+        package.delete()
+
+        return redirect('packages_view')
