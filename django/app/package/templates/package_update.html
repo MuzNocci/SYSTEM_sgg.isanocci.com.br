@@ -20,6 +20,7 @@
                             <script>
                                 document.getElementById("client").disabled = true;
                             </script>
+                            <input type="hidden" name="client" value="{{ package.client.id }}">
                             {% if form.client.errors %}
                                 <ul class="errorlist">
                                     {% for error in form.client.errors %}

@@ -3,7 +3,7 @@ from common import validators
 from app.client.models import Client
 from app.package.models import Plan, Package
 from decimal import Decimal
-from datetime import date
+from datetime import date, timedelta
 
 
 
@@ -104,7 +104,7 @@ class PackageRegisterForm(forms.Form):
             'placeholder': 'dd/mm/aaaa',
             'type': 'date',
             'min': '1900-01-01',
-            'max': date.today(),
+            'max': date.today() + timedelta(days=30),
         }),
         error_messages={'required': 'O campo cata de criação é obrigatório.'}
     )
