@@ -6,6 +6,7 @@ from app.client.models import Client
 from app.client.forms import ClientRegisterForm
 from django.db.models import Q
 from django.core.paginator import Paginator
+from django.utils.dateformat import DateFormat
 
 
 
@@ -116,7 +117,7 @@ class ClientUpdate(LoginRequiredMixin, View):
             'phone': client.phone,
             'whatsapp': client.whatsapp,
             'gender': client.gender,
-            'birth': client.birth,
+            'birth': DateFormat(client.birth).format('Y-m-d') if client.birth else '',
             'cpf': client.cpf,
             'rg': client.rg,
             'zip_code': client.zip_code,
@@ -179,7 +180,7 @@ class ClientView(LoginRequiredMixin, View):
             'phone': client.phone,
             'whatsapp': client.whatsapp,
             'gender': client.gender,
-            'birth': client.birth,
+            'birth': DateFormat(client.birth).format('Y-m-d') if client.birth else '',
             'cpf': client.cpf,
             'rg': client.rg,
             'zip_code': client.zip_code,
