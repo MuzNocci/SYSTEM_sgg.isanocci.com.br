@@ -6,6 +6,7 @@ from app.package.models import Package
 
 
 class Gallery(models.Model):
+    
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, unique=True)
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
@@ -15,6 +16,7 @@ class Gallery(models.Model):
     link_pass = models.CharField(max_length=255, blank=True, null=True)
     created_at = models.DateField(auto_now_add=True)
     active = models.BooleanField(default=True)
+
 
     def __str__(self):
         return self.name

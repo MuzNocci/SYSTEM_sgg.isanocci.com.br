@@ -257,10 +257,12 @@ class ClientRegisterForm(forms.Form):
         validators.Validate.valid_name(name)
         return name
     
+
     def clean_email(self):
         email = self.cleaned_data.get('email')
         validators.Validate.valid_email(email)
         return email
+
 
     def clean_phone(self):
         phone = self.cleaned_data.get('phone')
@@ -273,6 +275,7 @@ class ClientRegisterForm(forms.Form):
         validators.Validate.valid_date(birth)
         return birth
     
+
     def clean_cpf(self):
         cpf = self.cleaned_data.get('cpf')
         if cpf:
@@ -280,6 +283,7 @@ class ClientRegisterForm(forms.Form):
             if Client.objects.filter(cpf=cpf).exists():
                 raise forms.ValidationError("CPF já está cadastrado.")
         return cpf
+    
     
     def clean_rg(self):
         rg = self.cleaned_data.get('rg')

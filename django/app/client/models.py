@@ -19,6 +19,7 @@ def unique_file_path(instance, filename):
 
 class Client(models.Model):
 
+
     GENDER = [
         ('N', 'Não informado'),
         ('M', 'Masculino'),
@@ -79,7 +80,6 @@ class Client(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
 
-
     def photo_filename(self):
 
         return os.path.basename(self.photo.name)
@@ -90,7 +90,7 @@ class Client(models.Model):
         return remove_chars('[() .,-]', self.phone)
     
 
-
+    # returns
     def __str__(self):
 
         return self.name

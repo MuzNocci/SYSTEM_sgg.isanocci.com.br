@@ -59,15 +59,18 @@ class PlanRegisterForm(forms.Form):
         name = self.cleaned_data.get('name')
         return name
     
+
     def clean_duration(self):
         duration = self.cleaned_data.get('duration')
         validators.Validate.valid_duration(duration)
         return duration
     
+
     def clean_price(self):
         price = self.cleaned_data["price"]
         price = price.replace("R$", "").replace(".", "").replace(",", ".")
         return Decimal(price)
+
 
 
 class PackageRegisterForm(forms.Form):
@@ -111,10 +114,12 @@ class PackageRegisterForm(forms.Form):
         client = self.cleaned_data.get('client')
         return client
     
+
     def clean_plan(self):
         plan = self.cleaned_data.get('plan')
         return plan
     
+
     def clean_created_at(self):
         created_at = self.cleaned_data.get('created_at')
         return created_at
