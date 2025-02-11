@@ -13,7 +13,6 @@ class ClientRegisterForm(forms.Form):
         required=False,
         widget=forms.FileInput(attrs={
             'id': 'photo',
-            'name': 'photo',
             'accept': 'image/*'
         }),
         error_messages={
@@ -25,7 +24,6 @@ class ClientRegisterForm(forms.Form):
         required=True,
         widget=forms.TextInput(attrs={
             'id': 'name',
-            'name': 'name',
             'placeholder': 'Digite o nome',
             'maxlength': '255'
         }),
@@ -39,7 +37,6 @@ class ClientRegisterForm(forms.Form):
         required=False,
         widget=forms.TextInput(attrs={
             'id': 'instagram',
-            'name': 'instagram',
             'placeholder': '@instagram',
             'maxlength': '30'
         })
@@ -49,7 +46,6 @@ class ClientRegisterForm(forms.Form):
         required=True,
         widget=forms.EmailInput(attrs={
             'id': 'email',
-            'name': 'email',
             'placeholder': 'Digite o email',
             'maxlength':'255'
         }),
@@ -63,7 +59,6 @@ class ClientRegisterForm(forms.Form):
         required=True,
         widget=forms.TextInput(attrs={
             'id': 'phone',
-            'name': 'phone',
             'placeholder': '(22) 99999-9999',
             'maxlength':'15',
             'onkeydown':'javascript: fMasc( this, mPHONE );',
@@ -75,7 +70,6 @@ class ClientRegisterForm(forms.Form):
         required=False,
         widget=forms.CheckboxInput(attrs={
             'id': 'whatsapp',
-            'name': 'whatsapp',
             'style': 'margin-top: 10px'
         })
     )
@@ -85,7 +79,6 @@ class ClientRegisterForm(forms.Form):
         choices=[('N', '-- Selecione --'), ('M', 'Masculino'), ('F', 'Feminino')],
         widget=forms.Select(attrs={
             'id': 'gender',
-            'name': 'gender',
         }),
     )
 
@@ -93,7 +86,6 @@ class ClientRegisterForm(forms.Form):
         required=False,
         widget=forms.DateInput(attrs={
             'id': 'birth',
-            'name': 'birth',
             'placeholder': 'dd/mm/aaaa',
             'type': 'date',
             'maxlength':'10',
@@ -105,7 +97,6 @@ class ClientRegisterForm(forms.Form):
         required=False,
         widget=forms.TextInput(attrs={
             'id': 'cpf',
-            'name': 'cpf',
             'placeholder': '999.999.999-99',
             'maxlength':'14',
             'onkeydown':'javascript: fMasc( this, mCPF );',
@@ -117,7 +108,6 @@ class ClientRegisterForm(forms.Form):
         required=False,
         widget=forms.TextInput(attrs={
             'id': 'rg',
-            'name': 'rg',
             'placeholder': '99.999.999-6',
             'maxlength':'12',
             'onkeydown':'javascript: fMasc( this, mRG );',
@@ -129,7 +119,6 @@ class ClientRegisterForm(forms.Form):
         required=False,
         widget=forms.TextInput(attrs={
             'id': 'zip_code',
-            'name': 'zip_code',
             'placeholder': '00000-000',
             'maxlength':'9',
             'onkeydown':'javascript: fMasc( this, mCEP );',
@@ -141,7 +130,6 @@ class ClientRegisterForm(forms.Form):
         required=False,
         widget=forms.TextInput(attrs={
             'id': 'address',
-            'name': 'address',
             'placeholder': 'Digite o endereço (Ex: Rua Fulano de Tal)',
             'maxlength':'255',
         }),
@@ -152,7 +140,6 @@ class ClientRegisterForm(forms.Form):
         required=False,
         widget=forms.TextInput(attrs={
             'id': 'address_number',
-            'name': 'address_number',
             'placeholder': 'Digite o número',
             'maxlength':'6',
             'onkeydown':'javascript: fMasc( this, isNumber );',
@@ -164,7 +151,6 @@ class ClientRegisterForm(forms.Form):
         required=False,
         widget=forms.TextInput(attrs={
             'id': 'complement',
-            'name': 'complement',
             'placeholder': 'Digite o complemento do endereço',
             'maxlength':'255',
         })
@@ -174,7 +160,6 @@ class ClientRegisterForm(forms.Form):
         required=False,
         widget=forms.TextInput(attrs={
             'id': 'neighborhood',
-            'name': 'neighborhood',
             'placeholder': 'Digite o bairro',
             'maxlength':'45',
         }),
@@ -185,7 +170,6 @@ class ClientRegisterForm(forms.Form):
         required=False,
         widget=forms.TextInput(attrs={
             'id': 'city',
-            'name': 'city',
             'placeholder': 'Digite a cidade',
             'maxlength':'45',
         }),
@@ -235,7 +219,6 @@ class ClientRegisterForm(forms.Form):
         required=False,
         widget=forms.Textarea(attrs={
             'id': 'observation',
-            'name': 'observation',
             'placeholder': 'Digite uma observação',
             'rows': 5,
             'maxlength':'500',
@@ -246,7 +229,6 @@ class ClientRegisterForm(forms.Form):
         required=False,
         widget=forms.CheckboxInput(attrs={
             'id': 'active',
-            'name': 'active',
             'checked': 'checked',
         })
     )

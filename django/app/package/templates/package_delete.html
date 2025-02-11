@@ -3,13 +3,13 @@
 
 {% block content %}
 <div class="button-container">
-    <h1>Excluir Cliente</h1>
+    <h1>Excluir Pacote</h1>
 </div>
 <form action="{% url 'package_delete' id=package.id %}" method="POST">
     {% csrf_token %}
     <div class="grid" >
         <div class="form-section">
-            <h3>Você deseja excluir o cliente abaixo?</h3>
+            <h3>Você deseja excluir o pacote abaixo?</h3>
             <div class="form-row" style="padding: 1rem">
                 <div class="form-group">
                     <label for="client">Cliente:</label>

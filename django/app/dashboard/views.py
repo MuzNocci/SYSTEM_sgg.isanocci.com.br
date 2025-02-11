@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
 from app.package.models import Package
+from app.gallery.models import Gallery
+from app.client.models import Client
 from datetime import datetime
 
 
@@ -20,5 +22,8 @@ class DashboardView(LoginRequiredMixin, View):
         context = {
             'expired': expired,
             'expiring': expiring,
+            'clients': Client.objects.all().count(),
+            'packages': Package.objects.all().count(),
+            'galleries': Gallery.objects.all().count(),
         }
         return render(request, 'dashboard_show.html', context)

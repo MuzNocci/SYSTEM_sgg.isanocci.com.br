@@ -13,7 +13,7 @@ class Gallery(models.Model):
     package = models.ForeignKey(Package, on_delete=models.CASCADE)
     name = models.CharField(max_length=255, blank=False, null=False)
     link = models.CharField(max_length=255, blank=False, null=False)
-    link_pass = models.CharField(max_length=255, blank=True, null=True)
+    link_pass = models.CharField(max_length=45, blank=True, null=True)
     created_at = models.DateField(auto_now_add=True)
     active = models.BooleanField(default=True)
 

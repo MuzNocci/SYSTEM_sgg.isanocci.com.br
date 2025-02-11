@@ -186,8 +186,6 @@ class PackageRegister(LoginRequiredMixin, View):
                 active=True,
             )
 
-            # Criar aqui a lógica das galerias de fotos que estiverem em um plano com vencimento anteiror.
-
             return redirect('packages_view')
         
         context = {

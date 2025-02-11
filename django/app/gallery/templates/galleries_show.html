@@ -3,10 +3,10 @@
 
 {% block content %}
 <div class="button-container">
-    <h1>Lista de Pacotes</h1>
+    <h1>Lista de Galerias</h1>
     <a href={% url 'gallery_register' %}>
         <button class="button">
-            <i class="fas fa-plus"></i> Novo Pacote
+            <i class="fas fa-plus"></i> Nova Galeria
         </button>
     </a>
 </div>
@@ -25,25 +25,30 @@
     <div class="table">
         <div class="row header">
             <div class="cell name">Cliente</div>
-            <div class="cell">Pacote</div>
-            <div class="cell">Contratado em</div>
-            <div class="cell">Expira em</div>
+            <div class="cell">Galeria</div>
+            <div class="cell">Link</div>
+            <div class="cell">Ativo</div>
             <div class="cell action">Ações</div>
         </div> <!-- end row header -->
         {% for gallery in galleries %}
         <div class="row">
             <div class="cell name">{{ gallery.client.name }}</div>
-            <div class="cell">{{ gallery.plan.name }}</div>
-            <div class="cell">{{ gallery.created_at }}</div>
-            <div class="cell">{{ gallery.deadline }}</div>
+            <div class="cell">{{ gallery.name }}</div>
+            <div class="cell">{{ gallery.link }}</div>
+            <div class="cell">{{ gallery.active }}</div>
             <div class="cell action">
+                <button class="view">
+                    <a href="{% url 'gallery_view' gallery.id %}" title="Visualizar o galeria" alt="Visualizar o galeria">
+                        <i class="fa-solid fa-eye"></i>
+                    </a>
+                </button>
                 <button class="edit">
-                    <a href="{% url 'gallery_update' gallery.id %}" title="Atualizar o pacote" alt="Atualizar o pacote">
+                    <a href="{% url 'gallery_update' gallery.id %}" title="Atualizar o galeria" alt="Atualizar o galeria">
                         <i class="fa-solid fa-pen"></i>
                     </a>
                 </button>
                 <button class="delete">
-                    <a href="{% url 'gallery_delete' gallery.id %}" title="Excluir o pacote" alt="Excluir o pacote">
+                    <a href="{% url 'gallery_delete' gallery.id %}" title="Excluir o galeria" alt="Excluir o galeria">
                         <i class="fa-solid fa-trash"></i>
                     </a>
                 </button>
@@ -68,7 +73,7 @@
     <div class="table">
         <div class="row header">
             <div class="cell name">Cliente</div>
-            <div class="cell">Pacote</div>
+            <div class="cell">galeria</div>
             <div class="cell">Expira em</div>
             <div class="cell action">Ações</div>
         </div> <!-- end row header -->
@@ -76,9 +81,9 @@
     <div class="table">
         <div class="row">
             {% if search %}
-            <div class="cell">Nenhum pacote que corresponda a pesquisa por "{{ search }}".</div>
+            <div class="cell">Nenhuma galeria que corresponda a pesquisa por "{{ search }}".</div>
             {% else %}
-            <div class="cell">Nenhum pacote cadastrado.</div>
+            <div class="cell">Nenhuma galeria cadastrada.</div>
             {% endif %}
         </div> <!-- end row -->
     </div> <!-- end table -->         
