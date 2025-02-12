@@ -1,8 +1,4 @@
-from django.core.validators import validate_email
-from django.core.exceptions import ValidationError
 from django import forms
-from common import validators
-from app.gallery.models import Gallery
 from app.client.models import Client
 from app.package.models import Package
 
@@ -71,13 +67,12 @@ class GalleryForm(forms.Form):
         required=False,
         widget=forms.CheckboxInput(attrs={
             'id': 'active',
-            'checked': 'checked',
         })
     )
+    
 
+    def __init__(self, *args, exclude_option=None, **kwargs):
+        super().__init__(*args, **kwargs)
 
-    def clean_name(self):
-        name = self.cleaned_data.get('name')
-        if Gallery.objects.filter(name=name).exists():
-            raise ValidationError('Já existe uma galeria com este nome.')
-        return name
+        if exclude_option:
+            self.fields['package'].choices = [(package.id, package.name) for package in Package.objects.all()]

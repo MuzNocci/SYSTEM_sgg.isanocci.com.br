@@ -1,0 +1,100 @@
+{% extends '_base/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="button-container">
+    <h1>Atualizar Galeria</h1>
+</div>
+<form action="{% url 'gallery_update' gallery.id %}" method="POST">
+    {% csrf_token %}
+    <div class="grid">
+        <div class="form-section">
+            <h3>Dados da Galeria</h3>
+            <div class="form-col">
+                <div class="data">
+                    <div class="form-row mt-2" style="align-items: flex-start">
+                        <div class="form-group">
+                            <label for="client">Cliente:</label>
+                            {{ form.client }}
+                            <script>
+                                document.getElementById("client").disabled = true;
+                            </script>
+                            <input type="hidden" name="client" value="{{ gallery.client.id }}">
+                            {% if form.client.errors %}
+                                <ul class="errorlist">
+                                    {% for error in form.client.errors %}
+                                        <li>{{ error }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            <label for="package">Pacote:</label>
+                            {{ form.package }}
+                            {% if form.package.errors %}
+                                <ul class="errorlist">
+                                    {% for error in form.package.errors %}
+                                        <li>{{ error }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Nome da Galeria:</label>
+                            {{ form.name }}
+                            {% if form.name.errors %}
+                                <ul class="errorlist">
+                                    {% for error in form.name.errors %}
+                                        <li>{{ error }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        </div>  
+                    </div>
+                    <div class="form-row" style="align-items: flex-start">
+                        <div class="form-group">
+                            <label for="link">Link da Galeria:</label>
+                            {{ form.link }}
+                            {% if form.link.errors %}
+                                <ul class="errorlist">
+                                    {% for error in form.link.errors %}
+                                        <li>{{ error }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        </div>
+                        <div class="form-group" style="max-width: 150px;">
+                            <label for="link_pass">Senha do Link:</label>
+                            {{ form.link_pass }}
+                            {% if form.link_pass.errors %}
+                                <ul class="errorlist">
+                                    {% for error in form.link_pass.errors %}
+                                        <li>{{ error }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        </div>
+                        <div class="form-group" style="max-width: 150px;">
+                            <label for="active">Ativo:</label>
+                            <div>
+                                {{ form.active }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- end table -->           
+    </div> <!-- end grid -->
+    <div class="button-container">
+        <div></div>
+        <button class="button">
+            <i class="fas fa-plus"></i> Atualizar
+        </button>
+    </div>
+</form>
+{% endblock content %}
+
+{% block scripts %}
+<script src="{% static 'app/scripts/masks.js' %}"></script>
+{% endblock scripts %}

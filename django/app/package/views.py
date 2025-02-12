@@ -223,10 +223,8 @@ class PackageUpdate(LoginRequiredMixin, View):
 
             package.client = Client.objects.get(id=form.cleaned_data.get('client'))
             package.plan = Plan.objects.get(id=form.cleaned_data.get('plan'))
-
             created_at = form.cleaned_data.get('created_at')
             deadline = created_at + timedelta(days=package.plan.duration)
-            
             package.created_at = created_at
             package.deadline = deadline
             package.save()

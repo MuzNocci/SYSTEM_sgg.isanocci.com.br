@@ -35,7 +35,13 @@
             <div class="cell name">{{ gallery.client.name }}</div>
             <div class="cell">{{ gallery.name }}</div>
             <div class="cell">{{ gallery.link }}</div>
-            <div class="cell">{{ gallery.active }}</div>
+            <div class="cell">
+                {% if gallery.active %}
+                    <span style="color: green;">✔</span>
+                {% else %}
+                    <span style="color: red;">✖</span>
+                {% endif %}
+            </div>
             <div class="cell action">
                 <button class="view">
                     <a href="{% url 'gallery_view' gallery.id %}" title="Visualizar o galeria" alt="Visualizar o galeria">

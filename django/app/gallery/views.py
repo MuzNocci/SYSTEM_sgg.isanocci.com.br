@@ -101,7 +101,59 @@ class GalleryRegister(View):
 
 class GalleryUpdate(View):
 
-    ...
+
+    def get(self, request, id):
+
+        gallery = get_object_or_404(Gallery, id=id)
+        form = GalleryForm(exclude_option=True, initial={
+            'client': gallery.client.id,
+            'package': gallery.package.id,
+            'name': gallery.name,
+            'link': gallery.link,
+            'link_pass': gallery.link_pass,
+            'active': gallery.active,
+        })
+
+        context = {
+            'gallery': gallery,
+            'form' : form,
+        }
+        return render(request, 'gallery_update.html', context)
+   
+
+    def post(self, request, id):
+
+        gallery = get_object_or_404(Gallery, id=id)
+        form = GalleryForm(request.POST)
+
+        if form.is_valid():
+
+            gallery.client = Client.objects.get(id=form.cleaned_data.get('client'))
+            gallery.package = Package.objects.get(id=form.cleaned_data.get('package'))
+            gallery.name = form.cleaned_data.get('name')
+            gallery.link = form.cleaned_data.get('link')
+            gallery.link_pass = form.cleaned_data.get('link_pass')
+            gallery.created_at = date.today()
+            gallery.active = form.cleaned_data.get('active')
+            gallery.save()
+
+
+            return redirect('galleries_view')
+        
+        form = GalleryForm(exclude_option=True, initial={
+            'client': gallery.client.id,
+            'package': gallery.package.id,
+            'name': gallery.name,
+            'link': gallery.link,
+            'link_pass': gallery.link_pass,
+            'active': gallery.active,
+        })
+
+        context = {
+            'gallery': gallery,
+            'form' : form,
+        }
+        return render(request, 'gallery_update.html', context)
 
 
 
