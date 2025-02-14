@@ -15,7 +15,7 @@
                 <div class="data">
                     <div class="form-row mt-2" style="align-items: flex-start">
                         <div class="form-group">
-                            <label for="client">Cliente:</label>
+                            <label for="client">Cliente:<span class="com">*</span></label>
                             {{ form.client }}
                             <script>
                                 document.getElementById("client").disabled = true;
@@ -30,7 +30,7 @@
                             {% endif %}
                         </div>
                         <div class="form-group">
-                            <label for="plan">Plano:</label>
+                            <label for="plan">Plano:<span class="com">*</span></label>
                             {{ form.plan }}
                             {% if form.plan.errors %}
                                 <ul class="errorlist">
@@ -41,7 +41,7 @@
                             {% endif %}
                         </div>
                         <div class="form-group">
-                            <label for="created_at">Data de Criação:</label>
+                            <label for="created_at">Data de Criação:<span class="com">*</span></label>
                             {{ form.created_at }}
                             {% if form.created_at.errors %}
                                 <ul class="errorlist">
@@ -57,7 +57,7 @@
         </div> <!-- end table -->           
     </div> <!-- end grid -->
     <div class="button-container">
-        <div></div>
+        <div class="errorlist">Campos obrigatórios "*"</div>
         <button class="button">
             <i class="fas fa-sync"></i> Atualizar
         </button>

@@ -26,7 +26,7 @@
                 <div class="data">
                     <div class="form-row" style="margin-top: 10px;">
                         <div class="form-group">
-                            <label for="nome">Nome:</label>
+                            <label for="nome">Nome:<span class="com">*</span></label>
                             {{ form.name }}
                             {% if form.name.errors %}
                                 <ul class="errorlist">
@@ -43,7 +43,7 @@
                     </div>
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="email">Email:</label>
+                            <label for="email">Email:<span class="com">*</span></label>
                             {{ form.email }}
                             {% if form.email.errors %}
                                 <ul class="errorlist">
@@ -54,7 +54,7 @@
                             {% endif %}
                         </div>
                         <div class="form-group" style="max-width: 200px;">
-                            <label for="phone">Telefone:</label>
+                            <label for="phone">Telefone:<span class="com">*</span></label>
                             {{ form.phone }}
                             {% if form.phone.errors %}
                                 <ul class="errorlist">
@@ -154,7 +154,7 @@
         </div> <!-- end table -->           
     </div> <!-- end grid -->
     <div class="button-container">
-        <div></div>
+        <div class="errorlist">Campos obrigatórios "*"</div>
         <button class="button">
             <i class="fa-solid fa-user-plus"></i> Cadastrar
         </button>

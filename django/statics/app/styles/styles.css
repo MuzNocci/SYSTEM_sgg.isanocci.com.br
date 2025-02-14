@@ -199,6 +199,14 @@
         color: var(--colorpalette-dark_red);
     }
 
+    .com {
+        text-decoration: none;
+        list-style: none;
+        font-weight: bold;
+        font-size: 18px;
+        color: var(--colorpalette-dark_red);
+    }
+
     .errorlist {
         text-decoration: none;
         list-style: none;

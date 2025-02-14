@@ -15,7 +15,7 @@
                 <div class="data">
                     <div class="form-row mt-2" style="align-items: flex-start">
                         <div class="form-group">
-                            <label for="client">Cliente:</label>
+                            <label for="client">Cliente:<span class="com">*</span></label>
                             {{ form.client }}
                             {% if form.client.errors %}
                                 <ul class="errorlist">
@@ -26,7 +26,7 @@
                             {% endif %}
                         </div>
                         <div class="form-group">
-                            <label for="package">Pacote:</label>
+                            <label for="package">Pacote:<span class="com">*</span></label>
                             {{ form.package }}
                             {% if form.package.errors %}
                                 <ul class="errorlist">
@@ -37,7 +37,7 @@
                             {% endif %}
                         </div>
                         <div class="form-group">
-                            <label for="name">Nome da Galeria:</label>
+                            <label for="name">Nome da Galeria:<span class="com">*</span></label>
                             {{ form.name }}
                             {% if form.name.errors %}
                                 <ul class="errorlist">
@@ -50,7 +50,7 @@
                     </div>
                     <div class="form-row" style="align-items: flex-start">
                         <div class="form-group">
-                            <label for="link">Link da Galeria:</label>
+                            <label for="link">Link da Galeria:<span class="com">*</span></label>
                             {{ form.link }}
                             {% if form.link.errors %}
                                 <ul class="errorlist">
@@ -77,7 +77,7 @@
         </div> <!-- end table -->           
     </div> <!-- end grid -->
     <div class="button-container">
-        <div></div>
+        <div class="errorlist">Campos obrigatórios "*"</div>
         <button class="button">
             <i class="fas fa-plus"></i> Cadastrar
         </button>
