@@ -1,0 +1,36 @@
+{% extends "_base/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="button-container">
+    <h1>Excluir Galeria</h1>
+</div>
+<form action="{% url 'gallery_delete' id=gallery.id %}" method="POST">
+    {% csrf_token %}
+    <div class="grid" >
+        <div class="form-section">
+            <h3>Você deseja excluir o galeria abaixo?</h3>
+            <div class="form-row" style="padding: 1rem">
+                <div class="form-group name">
+                    <label for="client">Cliente:</label>
+                    <div class="data delete">{{ gallery.client.name }}</div>
+                </div>
+                <div class="form-group name">
+                    <label for="client">Galeria:</label>
+                    <div class="data delete">{{ gallery.name }}</div>
+                </div>
+                <div class="form-group">
+                    <label for="client">Pacote:</label>
+                    <div class="data delete">{{ gallery.package.name }}</div>
+                </div>
+            </div>
+        </div> <!-- end table -->           
+    </div> <!-- end grid -->
+    <div class="button-container">
+        <div></div>
+        <button class="del-client-button">
+            <i class="fa-solid fa-trash"></i> Excluir
+        </button>
+    </div>
+</form>
+{% endblock content %}
