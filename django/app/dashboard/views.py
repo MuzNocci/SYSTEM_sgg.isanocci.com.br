@@ -25,5 +25,6 @@ class DashboardView(LoginRequiredMixin, View):
             'clients': Client.objects.all().count(),
             'packages': Package.objects.all().count(),
             'galleries': Gallery.objects.all().count(),
+            # 'values': 'R$ 0,00'
         }
         return render(request, 'dashboard_show.html', context)

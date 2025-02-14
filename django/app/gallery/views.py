@@ -58,7 +58,7 @@ class GalleryView(LoginRequiredMixin, View):
 
 
 
-class GalleryRegister(View):
+class GalleryRegister(LoginRequiredMixin, View):
     
 
     def get(self, request):
