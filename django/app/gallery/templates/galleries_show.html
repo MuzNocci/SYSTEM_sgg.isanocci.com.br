@@ -34,7 +34,7 @@
         <div class="row">
             <div class="cell name">{{ gallery.client.name }}</div>
             <div class="cell">{{ gallery.name }}</div>
-            <div class="cell">{{ gallery.link }}</div>
+            <div class="cell"><a href="{{ gallery.link }}" target="_blanc">{{ gallery.link }}</a></div>
             <div class="cell">
                 {% if gallery.active %}
                     <span style="color: green;">✔</span>
