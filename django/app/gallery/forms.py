@@ -9,7 +9,6 @@ class GalleryForm(forms.Form):
 
     client = forms.ChoiceField(
         required=False,
-        choices=[(client.id, client.name) for client in Client.objects.all()],
         widget=forms.Select(attrs={
             'id': 'client',
         }),
@@ -18,7 +17,6 @@ class GalleryForm(forms.Form):
 
     package = forms.ChoiceField(
         required=False,
-        choices=[("new", "Novo pacote (Automático)")] + [(package.id, package.name) for package in Package.objects.all()],
         widget=forms.Select(attrs={
             'id': 'package',
         }),
@@ -71,8 +69,15 @@ class GalleryForm(forms.Form):
     )
     
 
-    def __init__(self, *args, exclude_option=None, **kwargs):
+    def __init__(self, *args, update_gallery=None, **kwargs):
         super().__init__(*args, **kwargs)
 
-        if exclude_option:
-            self.fields['package'].choices = [(package.id, package.name) for package in Package.objects.all()]
+        self.fields['client'].choices=[(client.id, client.name) for client in Client.objects.all()]
+
+        if update_gallery:
+            if update_gallery.package.plan.name == 'Automático':
+                self.fields['package'].choices = [(update_gallery.package.id, update_gallery.package.name)] + [(package.id, package.name) for package in Package.objects.filter(client=update_gallery.client).exclude(plan__name='Automático', id=update_gallery.package.id)]
+            else:
+                self.fields['package'].choices = [(package.id, package.name) for package in Package.objects.filter(client=update_gallery.client).exclude(plan__name='Automático')]
+        else:   
+            self.fields['package'].choices = [("new", "Novo pacote (Automático)")] + [(package.id, package.name) for package in Package.objects.exclude(plan__name='Automático')]
