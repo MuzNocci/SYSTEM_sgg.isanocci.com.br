@@ -1,6 +1,3 @@
-version: latest
-
-
 services:
 
   nginx:
@@ -23,7 +20,7 @@ services:
   django:
     container_name: "isasgg_django"
     restart: always
-    tty: true
+    tty: false
     build:
       context: ./django
       dockerfile: Dockerfile
