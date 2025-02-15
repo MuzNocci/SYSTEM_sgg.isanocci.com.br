@@ -11,6 +11,7 @@ RUN mkdir -p /var/www/public/staticfiles/
 RUN chmod 644 /var/www/public/staticfiles/
 RUN mkdir -p /var/www/public/medias/
 RUN chmod 777 /var/www/public/medias/
+RUN chmod +x start.sh
 
 RUN apk add --no-cache build-base postgresql-dev gcc musl-dev
 
