@@ -43,8 +43,9 @@ services:
     build:
       context: ./postgres
       dockerfile: Dockerfile
+    env_file:
+      - "./postgres/.env"
     volumes:
-      - ./django/.env:/docker-entrypoint-initdb.d/.env
       - postgres_data:/var/lib/postgresql/data
     networks:
       - isasgg_network
