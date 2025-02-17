@@ -17,6 +17,7 @@ RUN apk add --no-cache build-base postgresql-dev gcc musl-dev
 RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 
+RUN chmod +x ./start.sh
 ENTRYPOINT [ "sh", "-c", "./start.sh" ]
 
 EXPOSE 8000
