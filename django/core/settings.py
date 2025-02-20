@@ -43,10 +43,10 @@ INSTALLED_APPS = [
     'common.apps.CommonConfig',
     'authentication.apps.AuthenticationConfig',
     'app.apps.AppConfig',
-    'app.dashboard.apps.DashboardConfig',
     'app.client.apps.ClientConfig',
-    'app.gallery.apps.GalleryConfig',
     'app.package.apps.PackageConfig',
+    'app.gallery.apps.GalleryConfig',
+    'app.dashboard.apps.DashboardConfig',
 ]
 
 MIDDLEWARE = [
@@ -94,12 +94,12 @@ WSGI_APPLICATION = 'core.wsgi.application'
 DATABASES = {
 
     "default": {
-        "ENGINE": config('DB_ENGINE', default='django.db.backends.sqlite3'),
-        "HOST": config('DB_HOST', default=''),
-        "PORT": config('DB_PORT', default=0, cast=int),
-        "NAME": config('DB_NAME', default=BASE_DIR/'database/db.sqlite3'),
-        "USER": config('DB_USER', default=''),
-        "PASSWORD": config('DB_PASSWORD', default=''),
+        "ENGINE": config('ENGINE', default='django.db.backends.sqlite3'),
+        "HOST": config('HOST', default=''),
+        "PORT": config('PORT', default=0, cast=int),
+        "NAME": config('NAME', default=BASE_DIR/'database/db.sqlite3'),
+        "USER": config('USER', default=''),
+        "PASSWORD": config('PASSWORD', default=''),
     }
 
 }
@@ -173,3 +173,18 @@ MESSAGE_TAGS = {
     constants.SUCCESS: 'success',
     constants.WARNING: 'warning',
 }
+
+
+# E-mail settings
+
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+else:
+    EMAIL_BACKEND = config('EMAIL_BACKEND')
+    EMAIL_HOST = config('EMAIL_HOST')
+    EMAIL_BUSINESS = config('EMAIL_BUSINESS')
+    EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+    EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+    EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool, default=True)
+    EMAIL_USE_SSL = config('EMAIL_USE_SSL', cast=bool, default=False)
+    EMAIL_PORT = config('EMAIL_PORT')

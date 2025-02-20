@@ -22,9 +22,9 @@ class DashboardView(LoginRequiredMixin, View):
         context = {
             'expired': expired,
             'expiring': expiring,
-            'clients': Client.objects.all().count(),
-            'packages': Package.objects.all().count(),
-            'galleries': Gallery.objects.all().count(),
+            'clients': Client.objects.all().count() or 0,
+            'packages': Package.objects.all().count() or 0,
+            'galleries': Gallery.objects.all().count() or 0,
             # 'values': 'R$ 0,00'
         }
         return render(request, 'dashboard_show.html', context)

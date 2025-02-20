@@ -1,5 +1,3 @@
-from django.core.validators import validate_email
-from django.core.exceptions import ValidationError
 from django import forms
 from common import validators
 from app.client.models import Client, remove_chars

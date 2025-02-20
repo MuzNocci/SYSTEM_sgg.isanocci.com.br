@@ -33,5 +33,6 @@ class Package(models.Model):
     def name(self):
         return self.client.name + '_' + self.plan.name + '_' + self.created_at.strftime("%d/%m/%Y") + '_' + self.deadline.strftime("%d/%m/%Y")
 
+
     def __str__(self):
         return self.name

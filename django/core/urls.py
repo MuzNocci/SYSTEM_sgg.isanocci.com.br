@@ -8,19 +8,19 @@ from common.views import Handler403View, Handler404View, Handler500View, Handler
 
 urlpatterns = [
 
-    path('auth/admin/', admin.site.urls),
+    path('admin/', admin.site.urls),
     path('', include('authentication.urls')),
-    path('auth/', include('app.dashboard.urls')),
     path('auth/', include('app.client.urls')),
     path('auth/', include('app.package.urls')),
     path('auth/', include('app.gallery.urls')),
+    path('auth/', include('app.dashboard.urls')),
 
 ]
 
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
+    
 
 handler403 = Handler403View.as_view()
 handler404 = Handler404View.as_view()

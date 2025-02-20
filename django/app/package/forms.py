@@ -1,7 +1,7 @@
 from django import forms
 from common import validators
 from app.client.models import Client
-from app.package.models import Plan, Package
+from app.package.models import Plan
 from decimal import Decimal
 from datetime import date, timedelta
 
@@ -75,7 +75,7 @@ class PackageRegisterForm(forms.Form):
 
     client = forms.ChoiceField(
         required=False,
-        choices=[(client.id, client.name) for client in Client.objects.all()],
+        choices=[],
         widget=forms.Select(attrs={
             'id': 'client',
         }),
@@ -84,7 +84,7 @@ class PackageRegisterForm(forms.Form):
 
     plan = forms.ChoiceField(
         required=False,
-        choices=[(plan.id, plan.name) for plan in Plan.objects.exclude(name__icontains="Automático")],
+        choices=[],
         widget=forms.Select(attrs={
             'id': 'plan',
         }),
@@ -102,6 +102,12 @@ class PackageRegisterForm(forms.Form):
         }),
         error_messages={'required': 'O campo cata de criação é obrigatório.'}
     )
+
+
+    def __init__(self, *args, **kwargs):
+        super(PackageRegisterForm, self).__init__(*args, **kwargs)
+        self.fields['client'].choices = [(client.id, client.name) for client in Client.objects.all()]
+        self.fields['plan'].choices = [(plan.id, plan.name) for plan in Plan.objects.exclude(name__icontains="Automático")] 
 
 
     def clean_client(self):
