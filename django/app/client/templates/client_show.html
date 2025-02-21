@@ -144,14 +144,108 @@
                     <label for="observation">Observação:</label>
                     {{ form.observation }}
                 </div>
-                <div class="form-group" style="max-width: 150px;">
-                    <label for="active">Ativar cliente?</label>
-                    <div>
-                        {{ form.active }}
-                    </div>
-                </div>
             </div>
         </div> <!-- end table -->           
     </div> <!-- end grid -->
 </form>
+
+
+{% if packages %}
+    <div class="grid mt-3" >
+        <div class="exp">
+            <h3>Pacotes</h3>
+        </div>
+    </div>
+    {% for package in packages %}
+        <div class="grid">
+            <div class="table">
+                <div class="row header">
+                    <div class="cell">Pacote</div>
+                    <div class="cell">Data de criação</div>
+                    <div class="cell">Data de expiração</div>
+                    <div class="cell action">Ações</div>
+                </div> <!-- end row header -->
+                <div class="row">
+                    <div class="cell">
+                        {{ package.plan.name }}
+                    </div>
+                    <div class="cell">
+                        {{ package.created_at }}
+                    </div>
+                    <div class="cell">
+                        {{ package.deadline }}
+                    </div>
+                    <div class="cell action act">
+                        <a href="{% url 'package_update' id=package.id %}" title="Renovar o pacote" alt="Renovar o pacote">
+                            <i class="fas fa-sync-alt"></i>
+                        </a>
+                    </div>
+                </div> <!-- end row -->
+            </div> <!-- end table -->         
+        </div> <!-- end grid -->
+
+        <div class="table">
+            <div class="row header">
+                <div class="cell name exp">Cliente</div>
+                <div class="cell exp">Galeria</div>
+                <div class="cell exp">Link</div>
+                <div class="cell exp">Ativo</div>
+                <div class="cell action exp">Ações</div>
+            </div> <!-- end row header -->
+
+            {% for gallery in package.galleries.all%}
+                    <div class="row">
+                        <div class="cell name">{{ gallery.client.name }}</div>
+                        <div class="cell">{{ gallery.name }}</div>
+                        <div class="cell"><a href="{{ gallery.link }}" target="_blanc">{{ gallery.link }}</a></div>
+                        <div class="cell">
+                            {% if gallery.active %}
+                                <span style="color: green;">✔</span>
+                            {% else %}
+                                <span style="color: red;">✖</span>
+                            {% endif %}
+                        </div>
+                        <div class="cell action">
+                            <button class="view">
+                                <a href="{% url 'gallery_view' gallery.id %}" title="Visualizar o galeria" alt="Visualizar o galeria">
+                                    <i class="fa-solid fa-eye"></i>
+                                </a>
+                            </button>
+                            <button class="edit">
+                                <a href="{% url 'gallery_update' gallery.id %}" title="Atualizar o galeria" alt="Atualizar o galeria">
+                                    <i class="fa-solid fa-pen"></i>
+                                </a>
+                            </button>
+                            <button class="delete">
+                                <a href="{% url 'gallery_delete' gallery.id %}" title="Excluir o galeria" alt="Excluir o galeria">
+                                    <i class="fa-solid fa-trash"></i>
+                                </a>
+                            </button>
+                        </div>
+                    </div> <!-- end row -->
+            {% endfor %}
+                </div> <!-- end table -->   
+        {% endfor %}
+    {% else %}
+        <div class="grid mt-3" >
+            <div class="exp">
+                <h3>Pacote</h3>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="table">
+                <div class="row header">
+                    <div class="cell">Pacote</div>
+                    <div class="cell">Data de expiração</div>
+                    <div class="cell action">Ações</div>
+                </div> <!-- end row header -->
+            </div> <!-- end table --> 
+            <div class="table">
+                <div class="row">
+                    <div class="cell">Nenhum pacote ou galeria.</div>
+                </div> <!-- end row -->
+            </div> <!-- end table -->         
+        </div> <!-- end grid -->
+    {% endif %} 
+
 {% endblock content %}

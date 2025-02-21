@@ -10,7 +10,7 @@ class Gallery(models.Model):
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, unique=True)
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
-    package = models.ForeignKey(Package, on_delete=models.CASCADE)
+    package = models.ForeignKey(Package, on_delete=models.CASCADE, related_name='galleries')
     name = models.CharField(max_length=255, blank=False, null=False)
     link = models.CharField(max_length=255, blank=False, null=False)
     link_pass = models.CharField(max_length=45, blank=True, null=True)

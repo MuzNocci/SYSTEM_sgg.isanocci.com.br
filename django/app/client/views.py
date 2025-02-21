@@ -3,6 +3,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
 from app.client.models import Client
+from app.package.models import Package
+from app.gallery.models import Gallery
 from app.client.forms import ClientRegisterForm
 from django.db.models import Q
 from django.core.paginator import Paginator
@@ -197,6 +199,7 @@ class ClientView(LoginRequiredMixin, View):
 
         context = {
             'client': client,
+            'packages': Package.objects.prefetch_related('galleries').filter(client=client),
             'form' : form,
         }
         return render(request, 'client_show.html', context)
