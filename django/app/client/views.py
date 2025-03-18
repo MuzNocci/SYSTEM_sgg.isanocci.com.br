@@ -143,7 +143,7 @@ class ClientUpdate(LoginRequiredMixin, View):
     def post(self, request, id):
 
         client = get_object_or_404(Client, id=id)
-        form = ClientRegisterForm(request.POST, request.FILES)
+        form = ClientRegisterForm(request.POST, request.FILES, instance=client)
 
         if form.is_valid():
 

@@ -63,7 +63,6 @@ class Validate:
                 raise ValidationError(_('Número de CPF inválido.'))
 
         except:
-
             raise ValidationError(_('Número de CPF inválido.'))
         
 

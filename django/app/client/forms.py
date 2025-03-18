@@ -4,7 +4,12 @@ from app.client.models import Client, remove_chars
 
 
 
-class ClientRegisterForm(forms.Form):
+class ClientRegisterForm(forms.ModelForm):
+
+
+    class Meta:
+        model = Client
+        fields = '__all__'
 
 
     photo = forms.ImageField(
@@ -246,7 +251,7 @@ class ClientRegisterForm(forms.Form):
 
     def clean_phone(self):
         phone = self.cleaned_data.get('phone')
-        if len(phone) < 13:
+        if len(phone) < 14:
             raise forms.ValidationError('Telefone inválido.')
         return phone
     
@@ -255,16 +260,15 @@ class ClientRegisterForm(forms.Form):
         validators.Validate.valid_date(birth)
         return birth
     
-
     def clean_cpf(self):
         cpf = self.cleaned_data.get('cpf')
         if cpf:
-            validators.Validate.valid_cpf(cpf)
-            if Client.objects.filter(cpf=cpf).exists():
-                raise forms.ValidationError("CPF já está cadastrado.")
+            if Client.objects.exclude(id=self.instance.id).filter(cpf=cpf).exists():
+                raise forms.ValidationError('CPF já está cadastrado.')
+            else:
+                validators.Validate.valid_cpf(cpf)
         return cpf
-    
-    
+
     def clean_rg(self):
         rg = self.cleaned_data.get('rg')
         if rg:
