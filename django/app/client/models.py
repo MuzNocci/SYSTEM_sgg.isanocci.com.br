@@ -8,7 +8,7 @@ from common.utils import remove_chars
 def unique_file_path(instance, filename):
 
     ext = filename.split('.')[-1]
-    new_filename = f"{uuid.uuid4().hex}.{ext}"
+    new_filename = f"{uuid.uuid4().hex}.{ext}".lower()
     upload_to = 'app/images/clients/photos/' 
 
     while instance.__class__.objects.filter(photo=os.path.join(upload_to, new_filename)).exists():
@@ -94,7 +94,18 @@ class Client(models.Model):
     def __str__(self):
 
         return self.name
+    
 
+    def save(self, *args, **kwargs):
+
+        if self.pk and Client.objects.filter(pk=self.pk).exists():
+            old_client = Client.objects.get(pk=self.pk)
+            if old_client.photo and old_client.photo != self.photo:
+                if os.path.isfile(old_client.photo.path):
+                    os.remove(old_client.photo.path)
+
+        super().save(*args, **kwargs) 
+    
 
     def delete(self, *args, **kwargs):
 

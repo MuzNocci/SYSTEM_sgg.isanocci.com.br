@@ -147,12 +147,6 @@ class ClientUpdate(LoginRequiredMixin, View):
 
         if form.is_valid():
 
-            new_photo = form.cleaned_data.get('photo')
-
-            if new_photo and client.photo and client.photo != new_photo:
-                if os.path.isfile(client.photo.path):
-                    os.remove(client.photo.path)
-
             for field, value in form.cleaned_data.items():
                 if value:
                     setattr(client, field, value)
