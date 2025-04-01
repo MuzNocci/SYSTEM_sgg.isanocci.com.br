@@ -5,6 +5,7 @@ from app.package.models import Package
 from app.gallery.models import Gallery
 from app.client.models import Client
 from datetime import datetime
+from dateutil.relativedelta import relativedelta
 
 
 
@@ -14,7 +15,7 @@ class DashboardView(LoginRequiredMixin, View):
     def get(self, request):
 
         hoje = datetime.today()
-        deadline = hoje.replace(month=hoje.month + 1)
+        deadline = hoje + relativedelta(months=1)
 
         expired = Package.objects.filter(active=True, deadline__lt=hoje).order_by('deadline')
         expiring = Package.objects.filter(active=True, deadline__range=(hoje, deadline)).order_by('deadline')

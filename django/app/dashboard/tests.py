@@ -1,11 +1,11 @@
 from django.test import TestCase
+from dateutil.relativedelta import relativedelta
+from datetime import datetime
 
 
-from datetime import datetime, date
-from datetime import timezone
 
-hoje = date.today()
-proximo_mes = hoje.replace(month=hoje.month + 1)
+hoje = datetime.today()
+proximo_mes = hoje + relativedelta(months=1)
 
 print(hoje, type(hoje))
 print(proximo_mes, type(proximo_mes))
