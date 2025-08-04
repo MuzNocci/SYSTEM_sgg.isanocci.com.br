@@ -98,7 +98,7 @@ class PackageRegisterForm(forms.Form):
             'placeholder': 'dd/mm/aaaa',
             'type': 'date',
             'min': '1900-01-01',
-            'max': (date.today() + timedelta(days=30)).isoformat(),
+            'max': (date.today() + timedelta(days=60)).isoformat(),
         }),
         error_messages={'required': 'O campo cata de criação é obrigatório.'}
     )
