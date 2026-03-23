@@ -82,7 +82,7 @@
         {% if page == clients.number %}
             <button class="page-button active">{{ page }}</button>
         {% else %}
-            <a href="{% url 'clients_show' %}?search={{ search }}&page={{ page }}">
+            <a href="{% url 'clients_view' %}?search={{ search }}&page={{ page }}">
                 <button class="page-button">{{ page }}</button>
             </a>
         {% endif %}
